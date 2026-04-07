@@ -7,7 +7,11 @@ module.exports = {
       colors: {
         background: 'rgb(var(--background))',
         foreground: 'rgb(var(--foreground))',
+
         primary: 'rgb(var(--primary))',
+        'primary-foreground': 'rgb(var(--primary-foreground))',
+
+        border: 'rgb(var(--border))',
       },
     },
   },
