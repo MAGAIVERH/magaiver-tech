@@ -1,80 +1,111 @@
 'use client';
 
+import { useState } from 'react';
 import { Reveal } from '@/components/common/reveal';
 
+type Item = {
+  title: string;
+  highlight: string;
+  details: string;
+};
+
+const items: Item[] = [
+  {
+    title: 'SaaS & Systems',
+    highlight: '+3 production systems deployed',
+    details:
+      'Designed multi-tenant SaaS platforms with authentication, billing and dashboards. Reduced operational friction and enabled scalable growth.',
+  },
+  {
+    title: 'Performance',
+    highlight: 'Up to 40% faster load times',
+    details:
+      'Improved frontend and backend performance through better data flow, caching and rendering strategies.',
+  },
+  {
+    title: 'AI Integration',
+    highlight: 'Automated user workflows',
+    details:
+      'Integrated AI features for personalization and automation, improving engagement and reducing manual effort.',
+  },
+  {
+    title: 'Business Impact',
+    highlight: 'Real-world problem solving',
+    details:
+      'Built solutions focused on revenue, efficiency and user retention instead of just UI delivery.',
+  },
+];
+
 export function About() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
-    <section className='container mx-auto px-6 py-24'>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
-        {/* LEFT - TEXT */}
-        <div>
-          <Reveal>
-            <h2 className='text-3xl md:text-4xl font-bold mb-6'>About me</h2>
-          </Reveal>
+    <section className='container mx-auto px-6 py-32'>
+      <div className='max-w-6xl mx-auto'>
+        {/* TITLE */}
+        <Reveal>
+          <h2 className='text-3xl md:text-5xl font-bold mb-8'>About me</h2>
+        </Reveal>
 
-          <Reveal delay={0.1}>
-            <p className='text-muted-foreground max-w-xl leading-relaxed mb-6'>
-              I am a Full Stack Engineer focused on building scalable and
-              high-performance web applications. My work goes beyond just
-              writing code — I design systems, solve real business problems, and
-              deliver products that are ready for production.
-            </p>
-          </Reveal>
+        {/* MAIN TEXT */}
+        <Reveal delay={0.1}>
+          <p className='text-muted-foreground max-w-2xl leading-relaxed mb-16 text-lg'>
+            I build systems that solve real problems and generate real value. My
+            focus is not just writing code, but designing scalable architecture,
+            improving performance and delivering products that actually work in
+            production.
+          </p>
+        </Reveal>
 
-          <Reveal delay={0.2}>
-            <p className='text-muted-foreground max-w-xl leading-relaxed mb-6'>
-              I specialize in modern technologies like React, Next.js,
-              TypeScript, Node.js and PostgreSQL, with strong experience in SaaS
-              platforms, dashboards and AI-driven applications.
-            </p>
-          </Reveal>
+        {/* GRID INTERATIVO */}
+        <div className='grid md:grid-cols-2 gap-6'>
+          {items.map((item, index) => {
+            const isActive = activeIndex === index;
 
-          <Reveal delay={0.3}>
-            <p className='text-muted-foreground max-w-xl leading-relaxed'>
-              I care about performance, architecture and user experience. Every
-              project I build is designed to scale, perform and deliver real
-              value.
-            </p>
-          </Reveal>
-        </div>
+            return (
+              <Reveal key={item.title} delay={0.2 + index * 0.1}>
+                <div
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(null)}
+                  className={`
+                    relative border rounded-xl p-6 cursor-pointer
+                    transition-all duration-300
+                    ${isActive ? 'bg-muted scale-[1.02]' : 'bg-background'}
+                  `}
+                >
+                  {/* TITLE */}
+                  <h3 className='text-lg font-semibold mb-2'>{item.title}</h3>
 
-        {/* RIGHT - STATS */}
-        <div className='grid grid-cols-2 gap-4'>
-          <Reveal delay={0.2}>
-            <div className='border rounded-xl p-6 hover:bg-muted transition-all'>
-              <h3 className='text-2xl font-bold'>4+</h3>
-              <p className='text-sm text-muted-foreground'>
-                Years building production applications
-              </p>
-            </div>
-          </Reveal>
+                  {/* HIGHLIGHT */}
+                  <p className='text-sm font-medium mb-3 text-primary'>
+                    {item.highlight}
+                  </p>
 
-          <Reveal delay={0.3}>
-            <div className='border rounded-xl p-6 hover:bg-muted transition-all'>
-              <h3 className='text-2xl font-bold'>10+</h3>
-              <p className='text-sm text-muted-foreground'>
-                Projects shipped end-to-end
-              </p>
-            </div>
-          </Reveal>
+                  {/* DETAILS (aparece no hover) */}
+                  <p
+                    className={`
+                      text-sm text-muted-foreground leading-relaxed
+                      transition-all duration-300
+                      ${isActive ? 'opacity-100' : 'opacity-60'}
+                    `}
+                  >
+                    {item.details}
+                  </p>
 
-          <Reveal delay={0.4}>
-            <div className='border rounded-xl p-6 hover:bg-muted transition-all'>
-              <h3 className='text-2xl font-bold'>SaaS</h3>
-              <p className='text-sm text-muted-foreground'>
-                Multi-tenant platforms and dashboards
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.5}>
-            <div className='border rounded-xl p-6 hover:bg-muted transition-all'>
-              <h3 className='text-2xl font-bold'>AI</h3>
-              <p className='text-sm text-muted-foreground'>
-                AI integrations and smart features
-              </p>
-            </div>
-          </Reveal>
+                  {/* GLOW */}
+                  <div
+                    className={`
+                      pointer-events-none absolute inset-0 rounded-xl
+                      opacity-0 transition duration-300
+                      ${isActive ? 'opacity-100' : ''}
+                    `}
+                  >
+                    <div className='w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent blur-2xl' />
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
