@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Spotlight } from '@/components/interactive/spotlight';
 import { MagneticButton } from '@/components/common/magnetic-button';
 import { GlowButton } from '@/components/common/glow-button';
+import { Reveal } from '@/components/common/reveal';
 
 export function Hero() {
   return (
@@ -12,58 +13,49 @@ export function Hero() {
       <Spotlight />
 
       {/* TITLE */}
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className='relative z-10 text-4xl md:text-6xl font-bold tracking-tight max-w-3xl leading-tight'
-      >
-        <span className='bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent'>
-          Building scalable and high-performance web applications
-        </span>
-      </motion.h1>
+      <Reveal>
+        <h1 className='relative z-10 text-4xl md:text-6xl font-bold tracking-tight max-w-3xl leading-tight'>
+          <span className='bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent'>
+            Building scalable and high-performance web applications
+          </span>
+        </h1>
+      </Reveal>
 
       {/* SUBTITLE */}
-      <motion.p
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className='relative z-10 mt-6 text-lg md:text-xl text-muted-foreground max-w-xl'
-      >
-        Full Stack Engineer focused on performance, architecture and user
-        experience.
-      </motion.p>
+      <Reveal>
+        <p className='relative z-10 mt-6 text-lg md:text-xl text-muted-foreground max-w-xl'>
+          Full Stack Engineer focused on performance, architecture and user
+          experience.
+        </p>
+      </Reveal>
 
       {/* BUTTONS */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className='relative z-10 mt-8 flex gap-4'
-      >
-        <MagneticButton>
-          <GlowButton>
-            <Button
-              size='lg'
-              className='relative z-10 transition-all duration-300 hover:scale-105'
-            >
-              View Projects
-            </Button>
-          </GlowButton>
-        </MagneticButton>
+      <Reveal>
+        <div className='relative z-10 mt-8 flex gap-4'>
+          <MagneticButton>
+            <GlowButton>
+              <Button
+                size='lg'
+                className='relative z-10 transition-all duration-300 hover:scale-105'
+              >
+                View Projects
+              </Button>
+            </GlowButton>
+          </MagneticButton>
 
-        <MagneticButton>
-          <GlowButton>
-            <Button
-              variant='outline'
-              size='lg'
-              className='relative z-10 transition-all duration-300 hover:scale-105'
-            >
-              Contact
-            </Button>
-          </GlowButton>
-        </MagneticButton>
-      </motion.div>
+          <MagneticButton>
+            <GlowButton>
+              <Button
+                variant='outline'
+                size='lg'
+                className='relative z-10 transition-all duration-300 hover:scale-105'
+              >
+                Contact
+              </Button>
+            </GlowButton>
+          </MagneticButton>
+        </div>
+      </Reveal>
     </section>
   );
 }
