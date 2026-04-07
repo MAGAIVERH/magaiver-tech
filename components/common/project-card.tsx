@@ -44,17 +44,10 @@ export function ProjectCard({ project, onClick }: Props) {
 
   return (
     <motion.div
-      layoutId={`card-${project.id}`}
       onClick={onClick}
-      className='
-        cursor-pointer
-        border border-border
-        rounded-xl
-        p-5
-        transition-all duration-300
-        hover:bg-muted
-        hover:-translate-y-1
-      '
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      className='group relative rounded-xl border border-border bg-card p-6 cursor-pointer transition-colors duration-300 hover:bg-muted/50'
     >
       {/* HEADER */}
       <div className='flex items-center gap-3'>

@@ -9,9 +9,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body>
+      <body className='relative'>
         <SmoothScroll />
-        <ThemeProvider>{children}</ThemeProvider>
+
+        <ThemeProvider>
+          <div className='relative z-10'>{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );

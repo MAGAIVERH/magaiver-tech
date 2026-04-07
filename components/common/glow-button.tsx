@@ -23,7 +23,7 @@ export function GlowButton({ children }: { children: React.ReactNode }) {
     >
       {/* Glow */}
       <div
-        className='pointer-events-none absolute inset-0 rounded-lg opacity-0 transition duration-300'
+        className='pointer-events-none absolute inset-0 rounded-lg opacity-0 transition duration-300 z-0'
         style={{
           opacity: hovered ? 1 : 0,
           background: `radial-gradient(
