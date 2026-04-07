@@ -4,29 +4,53 @@ import { useEffect, useState } from 'react';
 
 export function Cursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
 
+    const handleMouseOver = (e: Event) => {
+      const target = e.target as HTMLElement;
+
+      if (
+        target.closest('button') ||
+        target.closest('a') ||
+        target.closest('.cursor-hover')
+      ) {
+        setHovered(true);
+      } else {
+        setHovered(false);
+      }
+    };
+
     window.addEventListener('mousemove', move);
+    window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
       window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
 
   return (
     <div
-      className='pointer-events-none fixed z-50'
+      className='pointer-events-none fixed z-50 transition-transform duration-150'
       style={{
         left: position.x,
         top: position.y,
         transform: 'translate(-50%, -50%)',
       }}
     >
-      <div className='h-6 w-6 rounded-full bg-white/20 backdrop-blur-md border border-white/30' />
+      <div
+        className={`rounded-full border transition-all duration-200 backdrop-blur-md
+        ${
+          hovered
+            ? 'h-12 w-12 bg-white/30 border-white/50'
+            : 'h-6 w-6 bg-white/20 border-white/30'
+        }`}
+      />
     </div>
   );
 }
