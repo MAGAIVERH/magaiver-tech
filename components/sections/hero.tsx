@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Spotlight } from '@/components/interactive/spotlight';
+import { MagneticButton } from '@/components/common/magnetic-button';
 
 export function Hero() {
   return (
     <section className='relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 bg-background text-foreground overflow-hidden'>
-      {/* Spotlight */}
       <Spotlight />
 
       <motion.h1
@@ -35,11 +35,24 @@ export function Hero() {
         transition={{ duration: 1 }}
         className='relative z-10 mt-8 flex gap-4'
       >
-        <Button size='lg'>View Projects</Button>
+        <MagneticButton>
+          <Button
+            size='lg'
+            className='transition-all duration-300 hover:scale-105'
+          >
+            View Projects
+          </Button>
+        </MagneticButton>
 
-        <Button variant='outline' size='lg'>
-          Contact
-        </Button>
+        <MagneticButton>
+          <Button
+            variant='outline'
+            size='lg'
+            className='transition-all duration-300 hover:scale-105'
+          >
+            Contact
+          </Button>
+        </MagneticButton>
       </motion.div>
     </section>
   );
