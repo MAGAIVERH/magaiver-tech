@@ -1,51 +1,80 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Project } from '@/constants/projects';
+import {
+  Dumbbell,
+  Stethoscope,
+  ShoppingCart,
+  BarChart3,
+  Layers,
+  LayoutDashboard,
+} from 'lucide-react';
 
-type Project = {
-  title: string;
-  description: string;
-  stack: string[];
-  live: string;
-  github: string;
-  linkedin: string;
+type Props = {
+  project: Project;
+  onClick: () => void;
 };
 
-export function ProjectCard({ project }: { project: Project }) {
+// ✅ MAPA FORA DO COMPONENTE (resolve o erro)
+const projectIconMap = {
+  fit: Dumbbell,
+  doctor: Stethoscope,
+  ecommerce: ShoppingCart,
+  analytics: BarChart3,
+  saas: Layers,
+  default: LayoutDashboard,
+};
+
+function getProjectIconKey(title: string): keyof typeof projectIconMap {
+  const lower = title.toLowerCase();
+
+  if (lower.includes('fit')) return 'fit';
+  if (lower.includes('dr')) return 'doctor';
+  if (lower.includes('e-commerce')) return 'ecommerce';
+  if (lower.includes('analytics')) return 'analytics';
+  if (lower.includes('saas')) return 'saas';
+
+  return 'default';
+}
+
+export function ProjectCard({ project, onClick }: Props) {
+  const iconKey = getProjectIconKey(project.title);
+  const Icon = projectIconMap[iconKey];
+
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      transition={{ type: 'spring', stiffness: 200 }}
-      className='border border-border rounded-xl p-6 bg-background hover:shadow-xl transition-all duration-300'
+      layoutId={`card-${project.id}`}
+      onClick={onClick}
+      className='
+        cursor-pointer
+        border border-border
+        rounded-xl
+        p-5
+        transition-all duration-300
+        hover:bg-muted
+        hover:-translate-y-1
+      '
     >
-      <h3 className='text-xl font-semibold'>{project.title}</h3>
+      {/* HEADER */}
+      <div className='flex items-center gap-3'>
+        <Icon size={18} className='opacity-70' />
 
-      <p className='mt-2 text-muted-foreground'>{project.description}</p>
-
-      {/* STACK */}
-      <div className='mt-4 flex flex-wrap gap-2'>
-        {project.stack.map((tech) => (
-          <span
-            key={tech}
-            className='text-sm px-2 py-1 border border-border rounded-md'
-          >
-            {tech}
-          </span>
-        ))}
+        <motion.h3
+          layoutId={`title-${project.id}`}
+          className='font-semibold text-lg'
+        >
+          {project.title}
+        </motion.h3>
       </div>
 
-      {/* LINKS */}
-      <div className='mt-6 flex gap-4 text-sm'>
-        <a href={project.live} className='underline'>
-          Live
-        </a>
-        <a href={project.github} className='underline'>
-          GitHub
-        </a>
-        <a href={project.linkedin} className='underline'>
-          LinkedIn
-        </a>
-      </div>
+      {/* DESCRIPTION */}
+      <motion.p
+        layoutId={`desc-${project.id}`}
+        className='mt-2 text-sm text-muted-foreground'
+      >
+        {project.description}
+      </motion.p>
     </motion.div>
   );
 }
