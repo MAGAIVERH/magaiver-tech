@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Spotlight } from '@/components/interactive/spotlight';
 import { MagneticButton } from '@/components/common/magnetic-button';
