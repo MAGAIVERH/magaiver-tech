@@ -1,5 +1,17 @@
-export const projects = [
+export type Project = {
+  id: string;
+  title: string;
+  description: string;
+  stack: string[];
+  live: string;
+  github: string;
+  linkedin: string;
+  image?: string;
+};
+
+export const projects: Project[] = [
   {
+    id: 'fit-ai',
     title: 'Fit.AI',
     description:
       'AI-powered workout platform with personalized plans and performance tracking.',
@@ -9,6 +21,7 @@ export const projects = [
     linkedin: '#',
   },
   {
+    id: 'dr-agenda',
     title: 'Dr. Agenda',
     description:
       'Clinic management SaaS with scheduling, dashboard and billing integration.',
@@ -18,37 +31,38 @@ export const projects = [
     linkedin: '#',
   },
   {
-    title: 'Dr. Agenda',
-    description:
-      'Clinic management SaaS with scheduling, dashboard and billing integration.',
-    stack: ['Next.js', 'Stripe', 'Prisma', 'PostgreSQL'],
+    id: 'ecommerce',
+    title: 'E-commerce Platform',
+    description: 'Full-featured e-commerce with payments, admin and analytics.',
+    stack: ['Next.js', 'Stripe', 'PostgreSQL'],
     live: '#',
     github: '#',
     linkedin: '#',
   },
   {
-    title: 'Dr. Agenda',
+    id: 'dashboard',
+    title: 'Analytics Dashboard',
     description:
-      'Clinic management SaaS with scheduling, dashboard and billing integration.',
-    stack: ['Next.js', 'Stripe', 'Prisma', 'PostgreSQL'],
+      'Real-time analytics dashboard with charts and performance metrics.',
+    stack: ['React', 'Chart.js', 'Node'],
     live: '#',
     github: '#',
     linkedin: '#',
   },
   {
-    title: 'Dr. Agenda',
-    description:
-      'Clinic management SaaS with scheduling, dashboard and billing integration.',
-    stack: ['Next.js', 'Stripe', 'Prisma', 'PostgreSQL'],
+    id: 'saas',
+    title: 'SaaS Platform',
+    description: 'Multi-tenant SaaS with authentication and billing system.',
+    stack: ['Next.js', 'Prisma', 'Stripe'],
     live: '#',
     github: '#',
     linkedin: '#',
   },
   {
-    title: 'Dr. Agenda',
-    description:
-      'Clinic management SaaS with scheduling, dashboard and billing integration.',
-    stack: ['Next.js', 'Stripe', 'Prisma', 'PostgreSQL'],
+    id: 'portfolio',
+    title: 'Interactive Portfolio',
+    description: 'Modern portfolio with animations and interactive UI.',
+    stack: ['Next.js', 'Framer Motion'],
     live: '#',
     github: '#',
     linkedin: '#',
