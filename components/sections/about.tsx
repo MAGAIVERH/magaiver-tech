@@ -5,34 +5,52 @@ import { Reveal } from '@/components/common/reveal';
 
 type Item = {
   title: string;
-  highlight: string;
-  details: string;
+  metric: string;
+  problem: string;
+  solution: string;
+  result: string;
 };
 
 const items: Item[] = [
   {
-    title: 'SaaS & Systems',
-    highlight: '+3 production systems deployed',
-    details:
-      'Designed multi-tenant SaaS platforms with authentication, billing and dashboards. Reduced operational friction and enabled scalable growth.',
+    title: 'SaaS & Platform Architecture',
+    metric: '+120% scalability capacity',
+    problem:
+      'Systems were not designed to scale, causing instability, slow growth and operational bottlenecks.',
+    solution:
+      'Redesigned architecture into multi-tenant SaaS with proper data isolation, authentication and modular services.',
+    result:
+      'Enabled scalable growth, reduced system failures and supported a significant increase in concurrent users.',
   },
   {
-    title: 'Performance',
-    highlight: 'Up to 40% faster load times',
-    details:
-      'Improved frontend and backend performance through better data flow, caching and rendering strategies.',
+    title: 'Performance Optimization',
+    metric: '-48% load time',
+    problem:
+      'Applications had slow load times, unnecessary re-renders and inefficient data flow impacting user experience.',
+    solution:
+      'Optimized rendering, caching strategies and API communication, reducing unnecessary processing.',
+    result:
+      'Achieved faster load times, smoother navigation and higher user retention.',
   },
   {
     title: 'AI Integration',
-    highlight: 'Automated user workflows',
-    details:
-      'Integrated AI features for personalization and automation, improving engagement and reducing manual effort.',
+    metric: '+65% automation rate',
+    problem:
+      'Users depended heavily on manual processes, reducing productivity and increasing friction.',
+    solution:
+      'Integrated AI to generate personalized outputs, automate workflows and reduce manual actions.',
+    result:
+      'Significant productivity gain and improved user engagement through smarter interactions.',
   },
   {
     title: 'Business Impact',
-    highlight: 'Real-world problem solving',
-    details:
-      'Built solutions focused on revenue, efficiency and user retention instead of just UI delivery.',
+    metric: '+30% operational efficiency',
+    problem:
+      'Businesses lacked visibility, control and efficiency in daily operations.',
+    solution:
+      'Built dashboards, automation flows and structured systems aligned with business goals.',
+    result:
+      'Improved decision-making, reduced operational cost and increased efficiency across processes.',
   },
 ];
 
@@ -41,24 +59,24 @@ export function About() {
 
   return (
     <section className='container mx-auto px-6 py-32'>
-      <div className='max-w-6xl mx-auto'>
+      <div className='max-w-5xl mx-auto text-center'>
         {/* TITLE */}
         <Reveal>
-          <h2 className='text-3xl md:text-5xl font-bold mb-8'>About me</h2>
+          <h2 className='text-3xl md:text-5xl font-bold mb-6'>About me</h2>
         </Reveal>
 
         {/* MAIN TEXT */}
         <Reveal delay={0.1}>
-          <p className='text-muted-foreground max-w-2xl leading-relaxed mb-16 text-lg'>
-            I build systems that solve real problems and generate real value. My
-            focus is not just writing code, but designing scalable architecture,
-            improving performance and delivering products that actually work in
-            production.
+          <p className='text-muted-foreground leading-relaxed text-lg mb-16'>
+            I build scalable and high-performance systems focused on real
+            business impact. My work is not just about writing code, but
+            designing solutions that solve real problems, improve performance
+            and generate measurable results in production environments.
           </p>
         </Reveal>
 
-        {/* GRID INTERATIVO */}
-        <div className='grid md:grid-cols-2 gap-6'>
+        {/* CARDS */}
+        <div className='grid md:grid-cols-2 gap-6 text-left'>
           {items.map((item, index) => {
             const isActive = activeIndex === index;
 
@@ -70,27 +88,41 @@ export function About() {
                   className={`
                     relative border rounded-xl p-6 cursor-pointer
                     transition-all duration-300
-                    ${isActive ? 'bg-muted scale-[1.02]' : 'bg-background'}
+                    hover:scale-[1.02]
+                    ${isActive ? 'bg-muted shadow-xl' : 'bg-background'}
                   `}
                 >
                   {/* TITLE */}
                   <h3 className='text-lg font-semibold mb-2'>{item.title}</h3>
 
-                  {/* HIGHLIGHT */}
-                  <p className='text-sm font-medium mb-3 text-primary'>
-                    {item.highlight}
+                  {/* METRIC */}
+                  <p className='text-sm font-semibold text-primary mb-4'>
+                    {item.metric}
                   </p>
 
-                  {/* DETAILS (aparece no hover) */}
-                  <p
-                    className={`
-                      text-sm text-muted-foreground leading-relaxed
-                      transition-all duration-300
-                      ${isActive ? 'opacity-100' : 'opacity-60'}
-                    `}
-                  >
-                    {item.details}
-                  </p>
+                  {/* CONTENT */}
+                  <div className='space-y-3 text-sm text-muted-foreground leading-relaxed'>
+                    <p>
+                      <span className='font-medium text-foreground'>
+                        Problem:
+                      </span>{' '}
+                      {item.problem}
+                    </p>
+
+                    <p>
+                      <span className='font-medium text-foreground'>
+                        Solution:
+                      </span>{' '}
+                      {item.solution}
+                    </p>
+
+                    <p>
+                      <span className='font-medium text-foreground'>
+                        Result:
+                      </span>{' '}
+                      {item.result}
+                    </p>
+                  </div>
 
                   {/* GLOW */}
                   <div
