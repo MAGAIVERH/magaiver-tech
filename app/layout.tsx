@@ -1,3 +1,4 @@
+import { SmoothScroll } from '@/components/interactive/smooth-scroll';
 import './globals.css';
 import { ThemeProvider } from '@/components/common/theme-provider';
 
@@ -9,6 +10,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body>
+        <SmoothScroll />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
