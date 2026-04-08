@@ -4,11 +4,15 @@ import { motion } from 'framer-motion';
 import type { Project } from '@/constants/projects';
 import {
   Dumbbell,
-  Stethoscope,
+  HandCoins,
+  Sparkles,
+  Utensils,
   ShoppingCart,
   BarChart3,
-  Layers,
+  Brain,
+  Stethoscope,
   LayoutDashboard,
+  Layers, // ✅ ADICIONADO
 } from 'lucide-react';
 
 type Props = {
@@ -16,13 +20,17 @@ type Props = {
   onClick: () => void;
 };
 
-// ✅ MAPA FORA DO COMPONENTE (resolve o erro)
+// ✅ MAPA MELHORADO (SEM QUEBRAR SUA LÓGICA)
 const projectIconMap = {
-  fit: Dumbbell,
+  fit: Brain, // melhor pra AI
   doctor: Stethoscope,
   ecommerce: ShoppingCart,
   analytics: BarChart3,
   saas: Layers,
+  tattoo: Sparkles,
+  food: Utensils,
+  crowdfunding: HandCoins,
+  personal: Dumbbell,
   default: LayoutDashboard,
 };
 
@@ -31,9 +39,15 @@ function getProjectIconKey(title: string): keyof typeof projectIconMap {
 
   if (lower.includes('fit')) return 'fit';
   if (lower.includes('dr')) return 'doctor';
-  if (lower.includes('e-commerce')) return 'ecommerce';
-  if (lower.includes('analytics')) return 'analytics';
+  if (lower.includes('e-commerce') || lower.includes('store'))
+    return 'ecommerce';
+  if (lower.includes('analytics') || lower.includes('finance'))
+    return 'analytics';
   if (lower.includes('saas')) return 'saas';
+  if (lower.includes('tattoo')) return 'tattoo';
+  if (lower.includes('food') || lower.includes('meki')) return 'food';
+  if (lower.includes('crowd')) return 'crowdfunding';
+  if (lower.includes('personal')) return 'personal';
 
   return 'default';
 }
@@ -51,7 +65,10 @@ export function ProjectCard({ project, onClick }: Props) {
     >
       {/* HEADER */}
       <div className='flex items-center gap-3'>
-        <Icon size={18} className='opacity-70' />
+        {/* ✅ MELHORIA VISUAL (badge) */}
+        <div className='p-2 rounded-md bg-primary/10'>
+          <Icon size={16} className='text-primary' />
+        </div>
 
         <motion.h3
           layoutId={`title-${project.id}`}

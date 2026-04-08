@@ -12,8 +12,15 @@ import {
   SiTypescript,
   SiPrisma,
   SiPostgresql,
+  SiFastify,
+  SiTailwindcss,
+  SiStripe,
+  SiShadcnui,
+  SiDrizzle,
 } from 'react-icons/si';
+import { Sparkles } from 'lucide-react';
 import type { IconType } from 'react-icons';
+import Image from 'next/image';
 
 const techIcons: Record<string, IconType> = {
   React: FaReact,
@@ -22,6 +29,12 @@ const techIcons: Record<string, IconType> = {
   TypeScript: SiTypescript,
   Prisma: SiPrisma,
   PostgreSQL: SiPostgresql,
+  Fastify: SiFastify,
+  AI: Sparkles,
+  Tailwind: SiTailwindcss,
+  Stripe: SiStripe,
+  Shadcnui: SiShadcnui,
+  Drizzle: SiDrizzle,
 };
 
 export function Projects() {
@@ -31,10 +44,12 @@ export function Projects() {
   const visibleProjects = showAll ? projects : projects.slice(0, 4);
 
   return (
-    <section className='py-24 px-6 bg-background text-foreground'>
+    <section id='projects' className='py-32 px-6 bg-background text-foreground'>
       <div className='max-w-5xl mx-auto'>
         <Reveal>
-          <h2 className='text-3xl md:text-4xl font-bold'>Selected Projects</h2>
+          <h2 className='text-3xl md:text-4xl font-bold text-center'>
+            Selected Projects
+          </h2>
         </Reveal>
 
         {/* GRID */}
@@ -51,16 +66,27 @@ export function Projects() {
 
         <div className='mt-10 flex justify-center'>
           <button
-            onClick={() => setShowAll((prev) => !prev)}
-            className='
-      px-5 py-2 
-      text-sm 
-      border border-border 
-      rounded-md 
-      transition-all duration-300
-      hover:bg-foreground 
-      hover:text-background
-    '
+            onClick={() => {
+              setShowAll((prev) => {
+                const next = !prev;
+
+                if (prev === true) {
+                  // estava aberto → vai fechar → scrolla de volta
+                  setTimeout(() => {
+                    const el = document.getElementById('projects');
+                    if (el) {
+                      el.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                      });
+                    }
+                  }, 100); // espera render
+                }
+
+                return next;
+              });
+            }}
+            className='px-5 py-2 text-sm border border-border rounded-md transition-all duration-300 hover:bg-foreground hover:text-background'
           >
             {showAll ? 'View less' : 'View more'}
           </button>
@@ -94,7 +120,7 @@ export function Projects() {
                   rounded-xl
                   p-5
                   shadow-2xl
-                  max-h-[85vh]
+                  max-h-[95vh]
                   overflow-y-auto
                 '
               >
@@ -123,8 +149,15 @@ export function Projects() {
                 </motion.p>
 
                 {/* PREVIEW */}
-                <div className='mt-4 h-32 md:h-40 rounded-lg border border-border flex items-center justify-center text-xs opacity-50'>
-                  Project Preview
+                <div className='mt-4 h-56 md:h-72 rounded-lg border border-border overflow-hidden relative'>
+                  {selected.image && (
+                    <Image
+                      src={selected.image}
+                      alt={selected.title}
+                      fill
+                      className='object-cover'
+                    />
+                  )}
                 </div>
 
                 {/* STORY */}
@@ -167,6 +200,8 @@ export function Projects() {
                 <div className='mt-4 flex flex-wrap gap-4 text-xs'>
                   <a
                     href={selected.live}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className='flex items-center gap-2 underline'
                   >
                     <FiExternalLink size={12} /> Live
@@ -174,6 +209,8 @@ export function Projects() {
 
                   <a
                     href={selected.github}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className='flex items-center gap-2 underline'
                   >
                     <FaGithub size={12} /> GitHub
@@ -181,6 +218,8 @@ export function Projects() {
 
                   <a
                     href={selected.linkedin}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className='flex items-center gap-2 underline'
                   >
                     <FaLinkedin size={12} /> LinkedIn
