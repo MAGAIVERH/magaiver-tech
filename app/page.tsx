@@ -1,4 +1,5 @@
-import { About } from '@/components/sections/about';
+import { AboutRadial } from '@/components/sections/about-radial';
+import { Contact } from '@/components/sections/contact';
 import { Header } from '@/components/sections/header';
 import { Hero } from '@/components/sections/hero';
 import { Projects } from '@/components/sections/projects';
@@ -9,7 +10,8 @@ export default function Home() {
       <Header />
       <Hero />
       <Projects />
-      <About />
+      <AboutRadial />
+      <Contact />
     </main>
   );
 }

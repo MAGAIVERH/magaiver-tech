@@ -7,6 +7,16 @@ import { GlowButton } from '@/components/common/glow-button';
 import { Reveal } from '@/components/common/reveal';
 
 export function Hero() {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   return (
     <section className='relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 bg-background text-foreground overflow-hidden'>
       <Spotlight />
@@ -35,6 +45,7 @@ export function Hero() {
             <GlowButton>
               <Button
                 size='lg'
+                onClick={() => scrollTo('projects')}
                 className='relative z-10 transition-all duration-300 hover:scale-105'
               >
                 View Projects
@@ -47,6 +58,7 @@ export function Hero() {
               <Button
                 variant='outline'
                 size='lg'
+                onClick={() => scrollTo('contact')}
                 className='relative z-10 transition-all duration-300 hover:scale-105'
               >
                 Contact
