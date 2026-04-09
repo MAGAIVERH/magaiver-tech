@@ -47,8 +47,8 @@ export function Cursor() {
         className={`rounded-full border transition-all duration-200 backdrop-blur-md
         ${
           hovered
-            ? 'h-12 w-12 bg-white/30 border-white/50'
-            : 'h-6 w-6 bg-white/20 border-white/30'
+            ? 'h-12 w-12 bg-black/40 border-black/40 dark:bg-white/30 dark:border-white/50'
+            : 'h-6 w-6 bg-black/30 border-black/30 dark:bg-white/20 dark:border-white/30'
         }`}
       />
     </div>
