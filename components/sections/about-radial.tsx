@@ -2,20 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { aboutItems } from '@/constants/about-items';
+import { AboutItem, aboutItems } from '@/constants/about-items';
 import { getAboutIcon } from '@/lib/get-about-icon';
-
-type AboutItem = {
-  id: string;
-  icon: string;
-  title: string;
-  metric: string;
-  problem: string;
-  solution: string;
-  result: string;
-};
+import { useI18n } from '@/hooks/use-i18n';
 
 export function AboutRadial() {
+  const { locale, dict } = useI18n();
   const [active, setActive] = useState<AboutItem | null>(null);
   const [radius, setRadius] = useState(140);
 
@@ -40,16 +32,16 @@ export function AboutRadial() {
       <div className='relative flex items-center justify-center'>
         {/* TEXTO CENTRAL */}
         <div className='absolute text-center z-10 px-6 max-w-md'>
-          <h2 className='text-4xl md:text-5xl font-bold mb-4'>About me</h2>
+          <h2 className='text-4xl md:text-5xl font-bold mb-4'>
+            {dict.about.title}
+          </h2>
 
           <p className='text-muted-foreground text-sm md:text-base leading-relaxed'>
-            I design and build systems focused on performance, scalability and
-            real business impact.
+            {dict.about.description}
           </p>
 
           <p className='text-xs mt-4 text-muted-foreground/70'>
-            Click on the orbiting elements to explore how I solve real-world
-            problems.
+            {dict.about.hint}
           </p>
         </div>
 
@@ -85,15 +77,17 @@ export function AboutRadial() {
                   <button
                     onClick={() => setActive(item)}
                     className='
-                      w-10 h-10 md:w-12 md:h-12
-                      rounded-full
-                      border border-white/20
-                      flex items-center justify-center
-                      hover:scale-110
-                      transition
-                      bg-background/40
-                      backdrop-blur
-                    '
+    w-10 h-10 md:w-12 md:h-12
+    rounded-full
+    border border-black/10
+    flex items-center justify-center
+    hover:scale-110
+    transition
+    bg-black/5
+    backdrop-blur
+    dark:border-white/20
+    dark:bg-background/40
+  '
                   >
                     <Icon size={16} />
                   </button>
@@ -107,7 +101,7 @@ export function AboutRadial() {
       {/* CARD CENTRAL */}
       {active && (
         <div
-          className='fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 px-4'
+          className='fixed inset-0 bg-black/20 dark:bg-black/60 backdrop-blur-md flex items-center justify-center z-50 px-4'
           onClick={() => setActive(null)}
         >
           <motion.div
@@ -116,20 +110,22 @@ export function AboutRadial() {
             className='bg-background border border-white/10 rounded-2xl w-full max-w-[420px] p-5 sm:p-6 md:p-8'
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className='text-xl font-bold mb-2'>{active.title}</h3>
+            <h3 className='text-xl font-bold mb-2'>{active.title[locale]}</h3>
 
-            <p className='text-sm mb-4 text-primary'>{active.metric}</p>
+            <p className='text-sm mb-4 text-primary'>{active.metric[locale]}</p>
 
             <p className='mb-3 text-sm'>
-              <strong>Problem:</strong> {active.problem}
+              <strong>{dict.about.modal.problem}</strong>{' '}
+              {active.problem[locale]}
             </p>
 
             <p className='mb-3 text-sm'>
-              <strong>Solution:</strong> {active.solution}
+              <strong>{dict.about.modal.solution}</strong>{' '}
+              {active.solution[locale]}
             </p>
 
             <p className='text-sm'>
-              <strong>Result:</strong> {active.result}
+              <strong>{dict.about.modal.result}</strong> {active.result[locale]}
             </p>
           </motion.div>
         </div>
