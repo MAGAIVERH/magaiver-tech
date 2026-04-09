@@ -4,21 +4,22 @@ import { Reveal } from '@/components/common/reveal';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
 import { MagneticButton } from '../common/magnetic-button';
+import { useI18n } from '@/hooks/use-i18n';
 
 export function Contact() {
+  const { dict } = useI18n();
   return (
     <section id='contact' className='py-32 px-6 bg-background text-foreground'>
       <div className='max-w-3xl mx-auto text-center'>
         <Reveal>
-          <h2 className='text-3xl md:text-4xl font-bold'>
-            Let’s build something great
+          <h2 className='text-4xl md:text-5xl font-bold '>
+            {dict.contact.title}
           </h2>
         </Reveal>
 
         <Reveal delay={0.1}>
           <p className='mt-4 text-muted-foreground'>
-            I’m open to opportunities, freelance projects, and collaborations.
-            Let’s connect.
+            {dict.contact.description}
           </p>
         </Reveal>
 
@@ -32,7 +33,7 @@ export function Contact() {
                 className='flex items-center gap-2 px-6 py-3 border border-border rounded-md hover:bg-foreground hover:text-background transition'
               >
                 <FiMail size={16} />
-                Send Email
+                {dict.contact.email}
               </a>
             </MagneticButton>
 
@@ -44,7 +45,7 @@ export function Contact() {
                 className='flex items-center gap-2 px-6 py-3 border border-border rounded-md hover:bg-foreground hover:text-background transition'
               >
                 <FaWhatsapp size={16} />
-                WhatsApp
+                {dict.contact.whatsapp}
               </a>
             </MagneticButton>
 
@@ -56,7 +57,7 @@ export function Contact() {
                 className='flex items-center gap-2 px-6 py-3 border border-border rounded-md hover:bg-foreground hover:text-background transition'
               >
                 <FaGithub size={16} />
-                GitHub
+                {dict.contact.github}
               </a>
             </MagneticButton>
 
@@ -68,7 +69,7 @@ export function Contact() {
                 className='flex items-center gap-2 px-6 py-3 border border-border rounded-md hover:bg-foreground hover:text-background transition'
               >
                 <FaLinkedin size={16} />
-                LinkedIn
+                {dict.contact.linkedin}
               </a>
             </MagneticButton>
           </div>
@@ -77,7 +78,7 @@ export function Contact() {
         {/* PHONE TEXT (opcional, mais profissional) */}
         <Reveal delay={0.3}>
           <p className='mt-6 text-sm text-muted-foreground'>
-            Or reach me directly: <strong>+55 (85) 98146-7094</strong>
+            {dict.contact.phone} <strong>+55 (85) 98146-7094</strong>
           </p>
         </Reveal>
       </div>
