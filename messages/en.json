@@ -1,6 +1,50 @@
 {
   "hero": {
     "title": "Building scalable and high-performance web applications",
-    "cta": "View Projects"
+    "subtitle": "Full Stack Engineer focused on performance, architecture and user experience.",
+    "cta": "View Projects",
+    "contact": "Contact"
+  },
+  "intro": {
+    "title": "About me",
+    "p1": "I'm Magaiver, a Full Stack Software Engineer with 4+ years of experience building scalable and high-performance web applications.",
+    "p2": "I work end-to-end across frontend and backend, designing architectures, modeling databases, and delivering production-ready systems. My main stack includes Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL, and Prisma or Drizzle as ORM solutions.",
+    "p3": "I've built SaaS platforms, operational dashboards, and API-driven systems with a strong focus on performance, maintainability, and clean architecture.",
+    "p4": "I also integrate AI into products to enhance user experience and automate complex workflows.",
+    "p5": "My goal is to build systems that generate real business impact, combining technical quality, scalability, and user-focused solutions."
+  },
+  "projects": {
+    "title": "Selected Projects",
+    "viewMore": "View more",
+    "viewLess": "View less",
+    "modal": {
+      "overviewTitle": "Overview",
+      "overview": "Built to deliver scalable architecture and high-performance UX.",
+      "problemTitle": "Problem",
+      "problem": "Lack of real-time visibility and inefficient workflows.",
+      "solutionTitle": "Solution",
+      "solution": "Modern application with optimized performance and intuitive UI.",
+      "impactTitle": "Impact",
+      "impact": "Increased efficiency by up to 40%."
+    }
+  },
+  "about": {
+    "title": "About me",
+    "description": "I design and build systems focused on performance, scalability and real business impact.",
+    "hint": "Click on the orbiting elements to explore how I solve real-world problems.",
+    "modal": {
+      "problem": "Problem",
+      "solution": "Solution",
+      "result": "Result"
+    }
+  },
+  "contact": {
+    "title": "Let’s build something great",
+    "description": "I’m open to opportunities, freelance projects, and collaborations. Let’s connect.",
+    "email": "Send Email",
+    "whatsapp": "WhatsApp",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "phone": "Or reach me directly:"
   }
 }

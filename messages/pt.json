@@ -1,6 +1,50 @@
 {
   "hero": {
     "title": "Construindo aplicações web escaláveis e performáticas",
-    "cta": "Ver Projetos"
+    "subtitle": "Engenheiro Full Stack focado em performance, arquitetura e experiência do usuário.",
+    "cta": "Ver Projetos",
+    "contact": "Contato"
+  },
+  "intro": {
+    "title": "Sobre mim",
+    "p1": "Sou Magaiver, desenvolvedor Full Stack com mais de 4 anos de experiência construindo aplicações web escaláveis e performáticas.",
+    "p2": "Atuo de ponta a ponta no frontend e backend, desenhando arquiteturas, modelando bancos de dados e entregando sistemas prontos para produção. Minha stack principal inclui Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL e Prisma ou Drizzle como ORM.",
+    "p3": "Já desenvolvi plataformas SaaS, dashboards operacionais e sistemas orientados a API com foco em performance, manutenibilidade e arquitetura limpa.",
+    "p4": "Também integro IA em produtos para melhorar a experiência do usuário e automatizar fluxos complexos.",
+    "p5": "Meu objetivo é construir sistemas que gerem impacto real no negócio, unindo qualidade técnica, escalabilidade e foco no usuário."
+  },
+  "projects": {
+    "title": "Projetos selecionados",
+    "viewMore": "Ver mais",
+    "viewLess": "Ver menos",
+    "modal": {
+      "overviewTitle": "Visão geral",
+      "overview": "Projetado para entregar arquitetura escalável e experiência do usuário de alta performance.",
+      "problemTitle": "Problema",
+      "problem": "Falta de visibilidade em tempo real e fluxos de trabalho ineficientes.",
+      "solutionTitle": "Solução",
+      "solution": "Aplicação moderna com performance otimizada e interface intuitiva.",
+      "impactTitle": "Impacto",
+      "impact": "Eficiência aumentada em até 40%."
+    }
+  },
+  "about": {
+    "title": "Sobre mim",
+    "description": "Eu projeto e construo sistemas focados em performance, escalabilidade e impacto real no negócio.",
+    "hint": "Clique nos elementos ao redor para explorar como resolvo problemas do mundo real.",
+    "modal": {
+      "problem": "Problema",
+      "solution": "Solução",
+      "result": "Resultado"
+    }
+  },
+  "contact": {
+    "title": "Vamos construir algo incrível",
+    "description": "Estou aberto a oportunidades, projetos freelance e colaborações. Vamos conversar.",
+    "email": "Enviar Email",
+    "whatsapp": "WhatsApp",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "phone": "Ou fale comigo diretamente:"
   }
 }
