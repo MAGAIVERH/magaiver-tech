@@ -5,13 +5,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: 'rgb(var(--background))',
-        foreground: 'rgb(var(--foreground))',
-
-        primary: 'rgb(var(--primary))',
-        'primary-foreground': 'rgb(var(--primary-foreground))',
-
-        border: 'rgb(var(--border))',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        border: 'rgb(var(--border) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
+        'primary-foreground': 'rgb(var(--primary-foreground) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        'muted-foreground': 'rgb(var(--muted-foreground) / <alpha-value>)',
       },
     },
   },
