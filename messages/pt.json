@@ -8,7 +8,7 @@
   "intro": {
     "title": "Sobre mim",
     "p1": "Sou Magaiver, desenvolvedor Full Stack com mais de 4 anos de experiência construindo aplicações web escaláveis e performáticas.",
-    "p2": "Atuo de ponta a ponta no frontend e backend, desenhando arquiteturas, modelando bancos de dados e entregando sistemas prontos para produção. Minha stack principal inclui Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL e Prisma ou Drizzle como ORM.",
+    "p2": "Atuo de ponta a ponta no frontend e backend, desenhando arquiteturas, modelando bancos de dados e entregando sistemas prontos para produção. Minha stack principal inclui Next.js, React, TypeScript, Node.js, Fastify, Express, PostgreSQL e Prisma ou Drizzle como ORM.",
     "p3": "Já desenvolvi plataformas SaaS, dashboards operacionais e sistemas orientados a API com foco em performance, manutenibilidade e arquitetura limpa.",
     "p4": "Também integro IA em produtos para melhorar a experiência do usuário e automatizar fluxos complexos.",
     "p5": "Meu objetivo é construir sistemas que gerem impacto real no negócio, unindo qualidade técnica, escalabilidade e foco no usuário."
