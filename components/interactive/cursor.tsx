@@ -63,7 +63,9 @@ export function Cursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
 
-  const isTouch = typeof window !== 'undefined' && 'ontouchstart' in window;
+  const isTouch =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(pointer: coarse)').matches;
 
   useEffect(() => {
     // MOUSE (desktop)
