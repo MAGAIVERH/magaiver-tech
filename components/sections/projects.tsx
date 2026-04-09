@@ -21,6 +21,7 @@ import {
 import { Sparkles } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import Image from 'next/image';
+import { useI18n } from '@/hooks/use-i18n';
 
 const techIcons: Record<string, IconType> = {
   React: FaReact,
@@ -38,6 +39,8 @@ const techIcons: Record<string, IconType> = {
 };
 
 export function Projects() {
+  const { dict } = useI18n();
+  const { locale } = useI18n();
   const [selected, setSelected] = useState<Project | null>(null);
   const [showAll, setShowAll] = useState(false);
 
@@ -47,8 +50,8 @@ export function Projects() {
     <section id='projects' className='py-32 px-6 bg-background text-foreground'>
       <div className='max-w-5xl mx-auto'>
         <Reveal>
-          <h2 className='text-3xl md:text-4xl font-bold text-center'>
-            Selected Projects
+          <h2 className='text-4xl md:text-5xl font-bold  text-center'>
+            {dict.projects.title}
           </h2>
         </Reveal>
 
@@ -86,9 +89,10 @@ export function Projects() {
                 return next;
               });
             }}
-            className='px-5 py-2 text-sm border border-border rounded-md transition-all duration-300 hover:bg-foreground hover:text-background'
+            className='px-5 py-2 text-sm border border-border rounded-md transition-all duration-300 
+            hover:bg-foreground hover:text-background'
           >
-            {showAll ? 'View less' : 'View more'}
+            {showAll ? dict.projects.viewLess : dict.projects.viewMore}
           </button>
         </div>
 
@@ -137,7 +141,7 @@ export function Projects() {
                   layoutId={`title-${selected.id}`}
                   className='text-lg md:text-2xl font-bold pr-6'
                 >
-                  {selected.title}
+                  {selected.title[locale]}
                 </motion.h3>
 
                 {/* DESC */}
@@ -145,7 +149,7 @@ export function Projects() {
                   layoutId={`desc-${selected.id}`}
                   className='mt-2 text-sm md:text-base text-muted-foreground'
                 >
-                  {selected.description}
+                  {selected.description[locale]}
                 </motion.p>
 
                 {/* PREVIEW */}
@@ -153,7 +157,7 @@ export function Projects() {
                   {selected.image && (
                     <Image
                       src={selected.image}
-                      alt={selected.title}
+                      alt={selected.title[locale]}
                       fill
                       className='object-cover'
                     />
@@ -163,19 +167,20 @@ export function Projects() {
                 {/* STORY */}
                 <div className='mt-4 space-y-3 text-xs md:text-sm text-muted-foreground'>
                   <p>
-                    <strong>Overview:</strong> Built to deliver scalable
-                    architecture and high-performance UX.
+                    <strong>{dict.projects.modal.overviewTitle}:</strong>{' '}
+                    {dict.projects.modal.overview}
                   </p>
                   <p>
-                    <strong>Problem:</strong> Lack of real-time visibility and
-                    inefficient workflows.
+                    <strong>{dict.projects.modal.problemTitle}:</strong>{' '}
+                    {dict.projects.modal.problem}
                   </p>
                   <p>
-                    <strong>Solution:</strong> Modern application with optimized
-                    performance and intuitive UI.
+                    <strong>{dict.projects.modal.solutionTitle}:</strong>{' '}
+                    {dict.projects.modal.solution}
                   </p>
                   <p>
-                    <strong>Impact:</strong> Increased efficiency by up to 40%.
+                    <strong>{dict.projects.modal.impactTitle}:</strong>{' '}
+                    {dict.projects.modal.impact}
                   </p>
                 </div>
 

@@ -14,6 +14,7 @@ import {
   LayoutDashboard,
   Layers, // ✅ ADICIONADO
 } from 'lucide-react';
+import { useI18n } from '@/hooks/use-i18n';
 
 type Props = {
   project: Project;
@@ -53,7 +54,8 @@ function getProjectIconKey(title: string): keyof typeof projectIconMap {
 }
 
 export function ProjectCard({ project, onClick }: Props) {
-  const iconKey = getProjectIconKey(project.title);
+  const { locale } = useI18n();
+  const iconKey = getProjectIconKey(project.title[locale]);
   const Icon = projectIconMap[iconKey];
 
   return (
@@ -74,7 +76,7 @@ export function ProjectCard({ project, onClick }: Props) {
           layoutId={`title-${project.id}`}
           className='font-semibold text-lg'
         >
-          {project.title}
+          {project.title[locale]}
         </motion.h3>
       </div>
 
@@ -83,7 +85,7 @@ export function ProjectCard({ project, onClick }: Props) {
         layoutId={`desc-${project.id}`}
         className='mt-2 text-sm text-muted-foreground'
       >
-        {project.description}
+        {project.description[locale]}
       </motion.p>
     </motion.div>
   );

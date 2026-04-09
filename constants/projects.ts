@@ -1,7 +1,13 @@
 export type Project = {
   id: string;
-  title: string;
-  description: string;
+  title: {
+    en: string;
+    pt: string;
+  };
+  description: {
+    en: string;
+    pt: string;
+  };
   stack: string[];
   live: string;
   github: string;
@@ -12,9 +18,14 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 'fit-ai',
-    title: 'Fit.AI',
-    description:
-      'Full-stack AI-powered workout platform that generates personalized training plans and tracks user performance. Built with a modern architecture separating frontend and API, including authentication, real-time interactions, and AI integration for dynamic plan generation.',
+    title: {
+      en: 'FitAI',
+      pt: 'FitAI',
+    },
+    description: {
+      en: 'Full-stack AI-powered workout platform that generates personalized training plans and tracks user performance. Built with a modern architecture separating frontend and API, including authentication, real-time interactions, and AI integration for dynamic plan generation.',
+      pt: 'Plataforma de treino completa, com inteligência artificial, que gera planos de treino personalizados e monitoriza o desempenho do utilizador. Construída com uma arquitetura moderna que separa o frontend da API, incluindo autenticação, interações em tempo real e integração de IA para geração dinâmica de planos.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -34,9 +45,15 @@ export const projects: Project[] = [
   },
   {
     id: 'dr-agenda',
-    title: 'Dr. Agenda',
-    description:
-      'Complete SaaS platform for clinic management, focused on scheduling, financial control, and operational efficiency. Includes authentication, dashboard, appointment flow, and Stripe integration for billing and subscriptions.',
+    title: {
+      en: 'Dr. Schedule',
+      pt: 'Dr. Agenda',
+    },
+    description: {
+      en: 'Complete SaaS platform for clinic management, focused on scheduling, financial control, and operational efficiency. Includes authentication, dashboard, appointment flow, and Stripe integration for billing and subscriptions.',
+      pt: 'Plataforma SaaS completa para gestão de clínicas, focada em agendamento, controle financeiro e eficiência operacional. Inclui autenticação, painel de controle, fluxo de consultas e integração com o Stripe para faturamento e assinaturas.',
+    },
+
     stack: [
       'Next.js',
       'React',
@@ -55,9 +72,14 @@ export const projects: Project[] = [
   },
   {
     id: 'personal-trainer',
-    title: 'Personal Trainer Scheduling Platform',
-    description:
-      'Scheduling platform for personal trainers with booking flows and responsive UI, designed to manage client sessions efficiently, and modern frontend architecture.',
+    title: {
+      en: 'Personal Trainer Scheduling Platform',
+      pt: 'Plataforma de Agendamento de Personal Trainers',
+    },
+    description: {
+      en: 'Scheduling platform for personal trainers with booking flows and responsive UI, designed to manage client sessions efficiently, and modern frontend architecture.',
+      pt: 'Plataforma de agendamento para personal trainers com fluxos de reserva e interface de usuário responsiva, projetada para gerenciar sessões de clientes com eficiência e arquitetura de front-end moderna.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -77,9 +99,14 @@ export const projects: Project[] = [
 
   {
     id: 'saas-platform',
-    title: 'SaaS Sales Platform',
-    description:
-      'End-to-end SaaS platform for selling and delivering ready-to-launch web solutions. Includes landing pages, checkout, onboarding flows, and an operational dashboard for client management.',
+    title: {
+      en: 'SaaS Sales Platform',
+      pt: 'SaaS Venda de plataformas',
+    },
+    description: {
+      en: 'End-to-end SaaS platform for selling and delivering ready-to-launch web solutions. Includes landing pages, checkout, onboarding flows, and an operational dashboard for client management.',
+      pt: 'Plataforma SaaS completa para venda e entrega de soluções web prontas para lançamento. Inclui páginas de destino, checkout, fluxos de integração e um painel operacional para gerenciamento de clientes.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -110,9 +137,14 @@ export const projects: Project[] = [
   // },
   {
     id: 'tattoo-booking',
-    title: 'Tattoo Artist Booking Platform',
-    description:
-      'Booking platform for tattoo artists with scheduling features, service management, and responsive interface. Built to streamline client booking experience.',
+    title: {
+      en: 'Tattoo Artist Booking Platform',
+      pt: 'Plataforma de agendamento de tatuadores',
+    },
+    description: {
+      en: 'Booking platform for tattoo artists with scheduling features, service management, and responsive interface. Built to streamline client booking experience.',
+      pt: 'Plataforma de agendamento para tatuadores com recursos de marcação de horários, gerenciamento de serviços e interface responsiva. Desenvolvida para simplificar a experiência de agendamento do cliente.',
+    },
     stack: [
       'React',
       'TypeScript',
@@ -154,9 +186,14 @@ export const projects: Project[] = [
   // },
   {
     id: 'crowdfunding',
-    title: 'Crowdfunding Platform',
-    description:
-      'Full-stack donation platform built for Jiu-Jitsu athletes, enabling fundraising campaigns and community support. Focused on usability, performance, and scalability.',
+    title: {
+      en: 'Crowdfunding Platform',
+      pt: 'Plataforma de financiamento coletivo',
+    },
+    description: {
+      en: 'Full-stack donation platform built for Jiu-Jitsu athletes, enabling fundraising campaigns and community support. Focused on usability, performance, and scalability.',
+      pt: 'Plataforma completa de doações desenvolvida para atletas de Jiu-Jitsu, permitindo campanhas de arrecadação de fundos e apoio da comunidade. Focada em usabilidade, desempenho e escalabilidade.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -176,9 +213,14 @@ export const projects: Project[] = [
 
   {
     id: 'food-delivery',
-    title: 'Food Delivery Platform',
-    description:
-      'Frontend-focused food delivery application simulating real-world ordering systems with interactive UI and responsive design.',
+    title: {
+      en: 'Food Delivery Platform',
+      pt: 'Plataforma de entrega de alimentos',
+    },
+    description: {
+      en: 'Frontend-focused food delivery application simulating real-world ordering systems with interactive UI and responsive design.',
+      pt: 'Aplicativo de entrega de comida com foco na interface do usuário, simulando sistemas de pedidos do mundo real com interface interativa e design responsivo.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -197,9 +239,14 @@ export const projects: Project[] = [
   },
   {
     id: 'online-store',
-    title: 'Online Store (E-commerce)',
-    description:
-      'Interactive e-commerce application built with React and Next.js, focusing on reusable components, performance, and modern frontend architecture.',
+    title: {
+      en: 'Online Store (E-commerce)',
+      pt: 'Loja online (comércio eletrônico)',
+    },
+    description: {
+      en: 'Interactive e-commerce application built with React and Next.js, focusing on reusable components, performance, and modern frontend architecture.',
+      pt: 'Aplicativo de comércio eletrônico interativo desenvolvido com React e Next.js, com foco em componentes reutilizáveis, desempenho e arquitetura de front-end moderna.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -218,9 +265,14 @@ export const projects: Project[] = [
   },
   {
     id: 'auto-meki',
-    title: 'Auto-Meki (Food Ordering Platform)',
-    description:
-      'Full-stack food ordering platform inspired by iFood, featuring dynamic menus, ordering flow, and responsive design. Built to simulate real-world delivery systems and user experience.',
+    title: {
+      en: 'Auto-Meki (Food Ordering Platform)',
+      pt: 'Auto-Meki (Plataforma de Pedidos de Comida)',
+    },
+    description: {
+      en: 'Full-stack food ordering platform inspired by iFood, featuring dynamic menus, ordering flow, and responsive design. Built to simulate real-world delivery systems and user experience.',
+      pt: 'Plataforma completa para pedidos de comida inspirada no iFood, com menus dinâmicos, fluxo de pedidos e design responsivo. Desenvolvida para simular sistemas de entrega e experiência do usuário do mundo real.',
+    },
     stack: [
       'Next.js',
       'React',
@@ -239,9 +291,14 @@ export const projects: Project[] = [
   },
   {
     id: 'finance-dashboard',
-    title: 'Finance Intel Dashboard',
-    description:
-      'Reliability-focused financial dashboard designed to visualize macro data and risk metrics. Emphasizes data clarity, performance, and scalable UI architecture using modern frontend patterns.',
+    title: {
+      en: 'Finance Intel Dashboard',
+      pt: 'Painel Financeiro Intel',
+    },
+    description: {
+      en: 'Reliability-focused financial dashboard designed to visualize macro data and risk metrics. Emphasizes data clarity, performance, and scalable UI architecture using modern frontend patterns.',
+      pt: 'Painel financeiro focado em confiabilidade, projetado para visualizar dados macro e métricas de risco. Prioriza a clareza dos dados, o desempenho e uma arquitetura de interface de usuário escalável, utilizando padrões modernos de front-end.',
+    },
     stack: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Shadcnui'],
     live: 'https://finance-intel-dashboard.vercel.app/',
     github: 'https://github.com/MAGAIVERH/finance-intel-dashboard',
