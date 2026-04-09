@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/common/theme-toggle';
+import { useI18n } from '@/hooks/use-i18n';
 
 export function Header() {
+  const { locale, setLocale } = useI18n();
   return (
     <div className='fixed top-6 left-1/2 -translate-x-1/2 z-50'>
       <div
@@ -28,7 +30,8 @@ export function Header() {
               rounded-full 
               object-cover
               transition-all duration-300
-              hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]
+              hover:scale-110 hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] 
+              dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]
             '
           />
         </div>
@@ -45,15 +48,35 @@ export function Header() {
           Available
         </span>
 
-        <div className='hidden md:block w-px h-4 bg-border' />
-
         {/* DIVIDER */}
         <div className='w-px h-4 bg-border' />
 
         {/* LANGUAGE (placeholder) */}
-        <button className='text-xs opacity-70 hover:opacity-100 transition'>
-          PT | EN
-        </button>
+        <div className='flex items-center gap-1 text-xs'>
+          <button
+            onClick={() => setLocale('pt')}
+            className={`transition ${
+              locale === 'pt'
+                ? 'opacity-100 font-semibold'
+                : 'opacity-50 hover:opacity-100'
+            }`}
+          >
+            🇧🇷 PT
+          </button>
+
+          <span className='opacity-40'>|</span>
+
+          <button
+            onClick={() => setLocale('en')}
+            className={`transition ${
+              locale === 'en'
+                ? 'opacity-100 font-semibold'
+                : 'opacity-50 hover:opacity-100'
+            }`}
+          >
+            🇬🇧 EN
+          </button>
+        </div>
 
         {/* THEME */}
         <ThemeToggle />
