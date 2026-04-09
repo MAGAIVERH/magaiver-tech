@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { SmoothScroll } from '@/components/interactive/smooth-scroll';
 import './globals.css';
 import { ThemeProvider } from '@/components/common/theme-provider';
-import { Cursor } from '@/components/interactive/cursor';
 import { I18nProvider } from '@/hooks/use-i18n';
+import { CursorProvider } from '@/components/interactive/cursor-provider';
 
 export const metadata: Metadata = {
   title: 'Magaiver Tech',
@@ -52,7 +52,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className='relative'>
         <SmoothScroll />
-        <Cursor />
+        <CursorProvider />
 
         <I18nProvider>
           <ThemeProvider>
