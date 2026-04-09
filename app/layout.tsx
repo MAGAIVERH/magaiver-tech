@@ -1,7 +1,47 @@
+import type { Metadata } from 'next';
+
 import { SmoothScroll } from '@/components/interactive/smooth-scroll';
 import './globals.css';
 import { ThemeProvider } from '@/components/common/theme-provider';
 import { Cursor } from '@/components/interactive/cursor';
+import { I18nProvider } from '@/hooks/use-i18n';
+
+export const metadata: Metadata = {
+  title: 'Magaiver Tech',
+  description:
+    'Full Stack Engineer focused on performance, scalable architecture and real business impact.',
+
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
+
+  openGraph: {
+    title: 'Magaiver Tech',
+    description:
+      'Full Stack Engineer focused on performance, scalable architecture and real business impact.',
+    url: 'https://magaiver-tech.vercel.app', // depois troca se quiser
+    siteName: 'Magaiver Tech',
+    images: [
+      {
+        url: '/apresentacao.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Magaiver Tech',
+    description:
+      'Full Stack Engineer focused on performance, scalable architecture and real business impact.',
+    images: ['/apresentacao.png'],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -13,9 +53,12 @@ export default function RootLayout({
       <body className='relative'>
         <SmoothScroll />
         <Cursor />
-        <ThemeProvider>
-          <div className='relative z-10'>{children}</div>
-        </ThemeProvider>
+
+        <I18nProvider>
+          <ThemeProvider>
+            <div className='relative z-10'>{children}</div>
+          </ThemeProvider>
+        </I18nProvider>
       </body>
     </html>
   );
