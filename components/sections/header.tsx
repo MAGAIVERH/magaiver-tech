@@ -5,6 +5,7 @@ import { ThemeToggle } from '@/components/common/theme-toggle';
 import { useI18n } from '@/hooks/use-i18n';
 
 export function Header() {
+  const { dict } = useI18n();
   const { locale, setLocale } = useI18n();
   return (
     <div className='fixed top-6 left-1/2 -translate-x-1/2 z-50'>
@@ -45,7 +46,7 @@ export function Header() {
         <div className='hidden md:block w-px h-4 bg-border' />
 
         <span className='hidden md:block text-xs text-muted-foreground'>
-          Available
+          {dict.header.title}
         </span>
 
         {/* DIVIDER */}
