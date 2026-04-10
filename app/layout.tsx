@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: 'Magaiver Tech',
     description:
       'Full Stack Engineer focused on performance, scalable architecture and real business impact.',
-    images: ['/apresentacao.png'],
+    images: ['/apresentacao4.png'],
   },
 };
 
