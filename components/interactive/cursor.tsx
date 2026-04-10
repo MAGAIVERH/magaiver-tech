@@ -36,7 +36,7 @@ export function Cursor() {
 
   return (
     <div
-      className='pointer-events-none fixed z-50 transition-transform duration-150'
+      className='custom-cursor pointer-events-none fixed z-50 transition-transform duration-150'
       style={{
         left: position.x,
         top: position.y,

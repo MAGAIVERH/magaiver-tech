@@ -67,6 +67,13 @@ export function Spotlight() {
        transparent 80%`;
 
   const radius = resolvedTheme === 'light' ? 400 : 800;
+
+  if (
+    typeof window !== 'undefined' &&
+    window.matchMedia('(pointer: coarse)').matches
+  ) {
+    return null;
+  }
   return (
     <div
       className='pointer-events-none fixed inset-0 z-50'
