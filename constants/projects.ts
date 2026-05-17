@@ -40,7 +40,7 @@ export const projects: Project[] = [
     live: 'https://treinos-frontend-gold.vercel.app/auth',
     github: 'https://github.com/MAGAIVERH/treinos-frontend',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/fitai.png',
   },
   {
