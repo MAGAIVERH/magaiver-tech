@@ -67,7 +67,7 @@ export const projects: Project[] = [
     live: 'https://dr-agenda-bay.vercel.app/authentication',
     github: 'https://github.com/MAGAIVERH/dr.agenda',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/dr.doctor.png',
   },
   {
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     live: 'https://personal-chi-cyan.vercel.app/',
     github: 'https://github.com/MAGAIVERH/adotapet',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/personal.png',
   },
 
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     live: 'https://minhaplataforma-nine.vercel.app/',
     github: 'https://github.com/MAGAIVERH/landing-sales',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/minha-plataforma.png',
   },
   // {
@@ -157,7 +157,7 @@ export const projects: Project[] = [
     live: 'https://tatto-shop.vercel.app/',
     github: 'https://github.com/MAGAIVERH/TattoShop',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/tatoo-shop.png',
   },
 
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     live: 'https://bjjfund.vercel.app/',
     github: 'https://github.com/MAGAIVERH',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/bjjfund.png',
   },
 
@@ -234,7 +234,7 @@ export const projects: Project[] = [
     live: 'https://mmtech-foods.vercel.app/',
     github: 'https://github.com/MAGAIVERH/mmtech-foods',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/mmfood.png',
   },
   {
@@ -260,7 +260,7 @@ export const projects: Project[] = [
     live: 'https://bewear-navy.vercel.app/',
     github: 'https://github.com/MAGAIVERH/BEWEAR',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/bewear-ecommerce.png',
   },
   {
@@ -286,7 +286,7 @@ export const projects: Project[] = [
     live: 'https://auto-meki.vercel.app/maga-donalds',
     github: 'https://github.com/MAGAIVERH/auto-meki',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/auto-meki.png',
   },
   {
@@ -303,7 +303,7 @@ export const projects: Project[] = [
     live: 'https://finance-intel-dashboard.vercel.app/',
     github: 'https://github.com/MAGAIVERH/finance-intel-dashboard',
     linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/dashboard-finance.png',
   },
 ];
