@@ -1,30 +1,49 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ReactNode, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { ReactNode, useRef } from 'react';
+import { cn } from '@/lib/utils';
 
-export function MagneticButton({ children }: { children: ReactNode }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+type MagneticButtonProps = {
+  children: ReactNode;
+  /** Pull strength relative to element size (default 0.35) */
+  intensity?: number;
+  className?: string;
+};
+
+export function MagneticButton({
+  children,
+  intensity = 0.35,
+  className,
+}: MagneticButtonProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 280, damping: 22, mass: 0.45 });
+  const springY = useSpring(y, { stiffness: 280, damping: 22, mass: 0.45 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    setPosition({ x: x * 0.2, y: y * 0.2 });
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(relX * rect.width * intensity);
+    y.set(relY * rect.height * intensity);
   };
 
   const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+    x.set(0);
+    y.set(0);
   };
 
   return (
     <motion.div
+      ref={ref}
+      style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 150, damping: 12 }}
-      className='inline-block'
+      className={cn('inline-block', className)}
     >
       {children}
     </motion.div>

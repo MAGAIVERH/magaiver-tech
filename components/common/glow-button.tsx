@@ -1,97 +1,65 @@
-// 'use client';
-
-// import { useState } from 'react';
-
-// export function GlowButton({ children }: { children: React.ReactNode }) {
-//   const [position, setPosition] = useState({ x: 0, y: 0 });
-//   const [hovered, setHovered] = useState(false);
-
-//   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-//     const rect = e.currentTarget.getBoundingClientRect();
-//     setPosition({
-//       x: e.clientX - rect.left,
-//       y: e.clientY - rect.top,
-//     });
-//   };
-
-//   return (
-//     <div
-//       onMouseMove={handleMouseMove}
-//       onMouseEnter={() => setHovered(true)}
-//       onMouseLeave={() => setHovered(false)}
-//       className='relative inline-block'
-//     >
-//       {/* Glow */}
-//       <div
-//         className='pointer-events-none absolute inset-0 rounded-lg opacity-0 transition duration-300 z-0'
-//         style={{
-//           opacity: hovered ? 1 : 0,
-//           background: `radial-gradient(
-//             120px circle at ${position.x}px ${position.y}px,
-//             rgba(255,255,255,0.25),
-//             transparent 70%
-//           )`,
-//         }}
-//       />
-
-//       {children}
-//     </div>
-//   );
-// }
-
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { useEffect, useRef, useState } from 'react';
+
+function getIsFinePointer() {
+  if (typeof window === 'undefined') return true;
+  return window.matchMedia('(pointer: fine)').matches;
+}
 
 export function GlowButton({ children }: { children: React.ReactNode }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isFinePointer, setIsFinePointer] = useState(true);
+  const { resolvedTheme } = useTheme();
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  const isDark = resolvedTheme === 'dark';
 
   useEffect(() => {
-    const updateTheme = () => {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => observer.disconnect();
+    setIsFinePointer(getIsFinePointer());
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+    if (!isFinePointer) return;
 
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    wrapRef.current?.style.setProperty('--glow-x', `${x}px`);
+    wrapRef.current?.style.setProperty('--glow-y', `${y}px`);
   };
 
   return (
     <div
+      ref={wrapRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => isFinePointer && setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className='relative inline-block'
+      style={
+        {
+          '--glow-x': '50%',
+          '--glow-y': '50%',
+          '--glow-radius': isDark ? '110px' : '90px',
+          '--glow-color': isDark
+            ? 'rgba(var(--glow) / 0.22)'
+            : 'rgba(var(--glow) / 0.07)',
+        } as React.CSSProperties
+      }
     >
-      {/* Glow */}
-      <div
-        className='pointer-events-none absolute inset-0 rounded-lg opacity-0 transition duration-300 z-0'
-        style={{
-          opacity: hovered ? 1 : 0,
-          background: `radial-gradient(
-            120px circle at ${position.x}px ${position.y}px,
-            ${isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.15)'},
-            transparent 70%
-          )`,
-        }}
-      />
+      {isFinePointer && (
+        <div
+          aria-hidden
+          className='pointer-events-none absolute inset-0 z-0 rounded-lg transition-opacity duration-300'
+          style={{
+            opacity: hovered ? 1 : 0,
+            background:
+              'radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y), var(--glow-color), transparent 72%)',
+          }}
+        />
+      )}
 
       {children}
     </div>
