@@ -155,7 +155,7 @@ function ViewMoreButton({
 export function Projects() {
   const { dict, locale } = useI18n();
   const scrollTo = useScrollTo();
-  const { prefersReducedMotion } = useLenis();
+  const { prefersReducedMotion, lenis } = useLenis();
   const [selected, setSelected] = useState<Project | null>(null);
   const [showAll, setShowAll] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -241,17 +241,27 @@ export function Projects() {
 
   useEffect(() => {
     if (!selected) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+
+    lenis?.stop();
+
+    const prevOverflow = document.body.style.overflow;
+    if (!lenis) {
+      document.body.style.overflow = 'hidden';
+    }
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelected(null);
     };
     window.addEventListener('keydown', onKey);
+
     return () => {
-      document.body.style.overflow = prev;
+      lenis?.start();
+      if (!lenis) {
+        document.body.style.overflow = prevOverflow;
+      }
       window.removeEventListener('keydown', onKey);
     };
-  }, [selected]);
+  }, [selected, lenis]);
 
   return (
     <section id='projects' className='py-32 px-6 bg-background text-foreground'>
@@ -319,12 +329,13 @@ export function Projects() {
                 layoutId={`card-${selected.id}`}
                 role='dialog'
                 aria-modal
+                data-lenis-prevent
                 onClick={(e) => e.stopPropagation()}
                 className={cn(
                   'relative w-full max-w-xl',
                   'bg-background border border-border rounded-xl',
                   'p-5 md:p-6 shadow-2xl',
-                  'max-h-[92vh] overflow-y-auto',
+                  'max-h-[92vh] overflow-y-auto overscroll-contain scrollbar-hidden',
                 )}
                 transition={{
                   type: 'spring',
