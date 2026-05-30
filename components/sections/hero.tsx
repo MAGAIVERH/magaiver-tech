@@ -1,88 +1,101 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import { Spotlight } from '@/components/interactive/spotlight';
+import { DotPattern } from '@/components/ui/dot-pattern';
 import { MagneticButton } from '@/components/common/magnetic-button';
 import { GlowButton } from '@/components/common/glow-button';
-import { Reveal } from '@/components/common/reveal';
 import { useI18n } from '@/hooks/use-i18n';
+import { useScrollTo } from '@/hooks/use-scroll-to';
+import { useLenis } from '@/components/providers/lenis-provider';
 
 export function Hero() {
   const { dict } = useI18n();
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+  const scrollTo = useScrollTo();
+  const { prefersReducedMotion } = useLenis();
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
-    el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
+  useEffect(() => {
+    const section = sectionRef.current;
+    const title = titleRef.current;
+    const subtitle = subtitleRef.current;
+    const ctas = ctaRef.current;
+
+    if (!section || !title || !subtitle || !ctas) return;
+
+    const buttons = ctas.children;
+
+    if (prefersReducedMotion) {
+      gsap.set([title, subtitle, buttons], { opacity: 1, y: 0, clearProps: 'all' });
+      return;
+    }
+
+    gsap.set([title, subtitle, buttons], { opacity: 0, y: 24 });
+
+    const ctx = gsap.context(() => {
+      gsap
+        .timeline({ defaults: { ease: 'power3.out' } })
+        .to(title, { opacity: 1, y: 0, duration: 0.75 })
+        .to(subtitle, { opacity: 1, y: 0, duration: 0.65 }, '-=0.4')
+        .to(buttons, { opacity: 1, y: 0, duration: 0.55, stagger: 0.1 }, '-=0.35');
+    }, section);
+
+    return () => ctx.revert();
+  }, [dict.hero.title, dict.hero.subtitle, prefersReducedMotion]);
 
   return (
     <section
-      className='relative min-h-[90vh] flex flex-col items-center justify-center 
-    text-center px-6 bg-background text-foreground overflow-hidden'
+      ref={sectionRef}
+      className='relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-background px-6 text-center text-foreground'
     >
-      <Spotlight />
+      <DotPattern />
 
-      {/* TITLE */}
-      <Reveal>
-        <h1
-          className='relative z-10 text-4xl md:text-5xl font-bold tracking-tight max-w-3xl 
-        leading-tight'
-        >
-          <span
-            className='
-    bg-gradient-to-b 
-    from-foreground 
-    to-foreground/70 
-    dark:to-foreground/60 
-    bg-clip-text 
-    text-transparent
-  '
-          >
-            {dict.hero.title}
-          </span>
-        </h1>
-      </Reveal>
+      <h1
+        ref={titleRef}
+        className='relative z-10 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl'
+      >
+        <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent dark:to-foreground/60'>
+          {dict.hero.title}
+        </span>
+      </h1>
 
-      {/* SUBTITLE */}
-      <Reveal>
-        <p className='relative z-10 mt-6 text-lg md:text-xl text-muted-foreground max-w-xl'>
-          {dict.hero.subtitle}
-        </p>
-      </Reveal>
+      <p
+        ref={subtitleRef}
+        className='relative z-10 mt-6 max-w-xl text-lg text-muted-foreground md:text-xl'
+      >
+        {dict.hero.subtitle}
+      </p>
 
-      {/* BUTTONS */}
-      <Reveal>
-        <div className='relative z-10 mt-8 flex gap-4'>
-          <MagneticButton>
-            <GlowButton>
-              <Button
-                size='lg'
-                onClick={() => scrollTo('projects')}
-                className='relative z-10 transition-all duration-300 hover:scale-105'
-              >
-                {dict.hero.cta}
-              </Button>
-            </GlowButton>
-          </MagneticButton>
+      <div ref={ctaRef} className='relative z-10 mt-8 flex flex-wrap justify-center gap-4'>
+        <MagneticButton>
+          <GlowButton>
+            <Button
+              size='lg'
+              onClick={() => scrollTo('projects')}
+              className='relative z-10 transition-transform duration-300 hover:scale-105'
+            >
+              {dict.hero.cta}
+            </Button>
+          </GlowButton>
+        </MagneticButton>
 
-          <MagneticButton>
-            <GlowButton>
-              <Button
-                variant='outline'
-                size='lg'
-                onClick={() => scrollTo('contact')}
-                className='relative z-10 transition-all duration-300 hover:scale-105'
-              >
-                {dict.hero.contact}
-              </Button>
-            </GlowButton>
-          </MagneticButton>
-        </div>
-      </Reveal>
+        <MagneticButton>
+          <GlowButton>
+            <Button
+              variant='outline'
+              size='lg'
+              onClick={() => scrollTo('contact')}
+              className='relative z-10 transition-transform duration-300 hover:scale-105'
+            >
+              {dict.hero.contact}
+            </Button>
+          </GlowButton>
+        </MagneticButton>
+      </div>
     </section>
   );
 }
