@@ -156,52 +156,51 @@ export function Header() {
   return (
     <header
       ref={shellRef}
-      className="pointer-events-none fixed top-6 left-1/2 z-header w-[92vw] max-w-md -translate-x-1/2 will-change-transform"
+      className="pointer-events-none fixed top-4 sm:top-6 left-1/2 z-header w-fit max-w-[92vw] -translate-x-1/2 will-change-transform"
       aria-hidden={isHidden}
     >
       <div
         className={cn(
-          'flex items-center justify-between gap-2 rounded-full border px-3 py-2 shadow-lg transition-[background-color,backdrop-filter,border-color,box-shadow,opacity] duration-500 md:gap-3 md:px-4',
+          'flex items-center gap-2 rounded-full border px-2.5 py-2 text-xs shadow-lg transition-[background-color,backdrop-filter,border-color,box-shadow,opacity] duration-500 sm:gap-3 sm:px-3 md:px-4',
           isHidden ? 'pointer-events-none opacity-0' : 'pointer-events-auto opacity-100',
           isScrolled
             ? 'border-border/80 bg-background/88 shadow-xl backdrop-blur-2xl'
             : 'border-border/40 bg-background/50 backdrop-blur-lg',
         )}
       >
-        <div className="flex min-w-0 shrink items-center gap-2">
-          <div ref={avatarRef} className="relative h-9 w-9 shrink-0">
-            <span
-              className={cn(
-                'absolute inset-0 rounded-full transition-opacity duration-500',
-                isScrolled
-                  ? 'bg-foreground/10 opacity-100'
-                  : 'bg-foreground/5 opacity-70',
-              )}
-              aria-hidden
-            />
-            <Image
-              src="/magaiveravatar.jpg"
-              alt="Magaiver"
-              fill
-              sizes="36px"
-              priority
-              className="relative z-10 rounded-full object-cover ring-1 ring-border/60"
-            />
-          </div>
-
-          <span className="truncate text-sm font-medium tracking-wide">Magaiver Tech</span>
+        <div ref={avatarRef} className="relative h-9 w-9 shrink-0">
+          <span
+            className={cn(
+              'absolute inset-0 rounded-full transition-opacity duration-500',
+              isScrolled
+                ? 'bg-foreground/10 opacity-100'
+                : 'bg-foreground/5 opacity-70',
+            )}
+            aria-hidden
+          />
+          <Image
+            src="/magaiveravatar.jpg"
+            alt="Magaiver"
+            fill
+            sizes="36px"
+            priority
+            className="relative z-10 rounded-full object-cover ring-1 ring-border/60"
+          />
         </div>
 
-        <div className="hidden h-4 w-px bg-border md:block" />
+        <span className="shrink-0 text-sm font-medium tracking-wide whitespace-nowrap">
+          Magaiver Tech
+        </span>
 
-        <span className="hidden truncate text-xs text-muted-foreground md:block">
+        <div className="h-4 w-px shrink-0 bg-border" />
+
+        <span className="shrink-0 text-[10px] text-muted-foreground whitespace-nowrap sm:text-xs">
           {dict.header.title}
         </span>
 
-        <div className="h-4 w-px bg-border" />
+        <div className="h-4 w-px shrink-0 bg-border" />
 
-        <div className="flex items-center gap-1.5 text-xs md:gap-2">
-          <button
+        <button
             type="button"
             onClick={() => setLocale('pt')}
             className={cn(
@@ -241,10 +240,9 @@ export function Header() {
             <span className="hidden sm:inline">EN</span>
           </button>
 
-          <div ref={themeWrapRef} className="inline-flex">
+          <div ref={themeWrapRef} className="inline-flex shrink-0">
             <ThemeToggle />
           </div>
-        </div>
       </div>
     </header>
   );
