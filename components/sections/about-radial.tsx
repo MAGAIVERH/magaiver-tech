@@ -155,7 +155,7 @@ export function AboutRadial() {
   };
 
   return (
-    <section ref={sectionRef} className='py-32 flex items-center justify-center relative'>
+    <section ref={sectionRef} className='py-32 flex items-center justify-center relative overflow-x-clip'>
       <div className='relative flex items-center justify-center'>
         <div
           className='relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] md:w-[600px] md:h-[600px]'

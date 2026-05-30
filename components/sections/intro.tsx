@@ -18,7 +18,7 @@ const INTRO_KEYS = ['p1', 'p2', 'p3', 'p4', 'p5'] as const;
 
 export function Intro() {
   const { dict } = useI18n();
-  const { prefersReducedMotion } = useLenis();
+  const { prefersReducedMotion, isCoarsePointer } = useLenis();
   const sectionRef = useRef<HTMLElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -35,7 +35,7 @@ export function Intro() {
 
       const items = paragraphs.querySelectorAll<HTMLParagraphElement>('.intro-paragraph');
 
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion || isCoarsePointer) {
         gsap.set([title, items], {
           clearProps: 'all',
           opacity: 1,
@@ -179,6 +179,7 @@ export function Intro() {
         dict.intro.title,
         ...INTRO_KEYS.map((key) => dict.intro[key]),
         prefersReducedMotion,
+        isCoarsePointer,
       ],
     },
   );

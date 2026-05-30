@@ -33,7 +33,7 @@ const Contact = dynamic(
 
 export default function Home() {
   return (
-    <main className='bg-[rgb(var(--background))] text-[rgb(var(--foreground))] min-h-screen'>
+    <main className='bg-[rgb(var(--background))] text-[rgb(var(--foreground))] min-h-screen overflow-x-clip'>
       <Header />
       <Hero />
       <Intro />

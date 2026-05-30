@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   motion,
   useMotionTemplate,
@@ -69,6 +69,15 @@ export function ProjectCard({ project, onClick, className }: Props) {
   const iconKey = getProjectIconKey(project.title[locale]);
   const Icon = projectIconMap[iconKey];
   const cardRef = useRef<HTMLDivElement>(null);
+  const [enableTilt, setEnableTilt] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(pointer: fine)');
+    const sync = () => setEnableTilt(media.matches);
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
 
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -91,6 +100,8 @@ export function ProjectCard({ project, onClick, className }: Props) {
   const glareBackground = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(var(--glow) / 0.14), transparent 55%)`;
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return;
+
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
@@ -110,12 +121,15 @@ export function ProjectCard({ project, onClick, className }: Props) {
       onClick={onClick}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetTilt}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 900,
-        transformStyle: 'preserve-3d',
-      }}
+      style={
+        enableTilt
+          ? {
+              rotateX,
+              rotateY,
+              transformPerspective: 900,
+            }
+          : undefined
+      }
       whileTap={{ scale: 0.985 }}
       className={cn('cursor-hover will-change-transform', className)}
     >
@@ -130,7 +144,7 @@ export function ProjectCard({ project, onClick, className }: Props) {
             style={{ background: glareBackground }}
           />
 
-          <div className='relative' style={{ transform: 'translateZ(24px)' }}>
+          <div className='relative project-card-content'>
             <div className='flex items-center gap-3'>
               <div className='p-2 rounded-md bg-primary/10 ring-1 ring-primary/15'>
                 <Icon size={16} className='text-primary' />

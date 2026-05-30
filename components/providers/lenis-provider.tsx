@@ -14,6 +14,7 @@ import { loadScrollTrigger } from '@/lib/gsap-scroll-trigger';
 type LenisContextValue = {
   lenis: Lenis | null;
   prefersReducedMotion: boolean;
+  isCoarsePointer: boolean;
 };
 
 const LenisContext = createContext<LenisContextValue | null>(null);
@@ -33,14 +34,25 @@ type LenisProviderProps = {
 export function LenisProvider({ children }: LenisProviderProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const syncPreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointerQuery = window.matchMedia('(pointer: coarse)');
 
-    syncPreference();
-    mediaQuery.addEventListener('change', syncPreference);
-    return () => mediaQuery.removeEventListener('change', syncPreference);
+    const syncMotion = () => setPrefersReducedMotion(motionQuery.matches);
+    const syncPointer = () => setIsCoarsePointer(pointerQuery.matches);
+
+    syncMotion();
+    syncPointer();
+
+    motionQuery.addEventListener('change', syncMotion);
+    pointerQuery.addEventListener('change', syncPointer);
+
+    return () => {
+      motionQuery.removeEventListener('change', syncMotion);
+      pointerQuery.removeEventListener('change', syncPointer);
+    };
   }, []);
 
   useEffect(() => {
@@ -52,7 +64,7 @@ export function LenisProvider({ children }: LenisProviderProps) {
   }, [prefersReducedMotion]);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || isCoarsePointer) {
       setLenis(null);
       return;
     }
@@ -94,11 +106,11 @@ export function LenisProvider({ children }: LenisProviderProps) {
       }
       setLenis(null);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, isCoarsePointer]);
 
   const value = useMemo(
-    () => ({ lenis, prefersReducedMotion }),
-    [lenis, prefersReducedMotion],
+    () => ({ lenis, prefersReducedMotion, isCoarsePointer }),
+    [lenis, prefersReducedMotion, isCoarsePointer],
   );
 
   return (
