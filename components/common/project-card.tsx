@@ -1,6 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import type { Project } from '@/constants/projects';
 import {
   Dumbbell,
@@ -12,18 +19,20 @@ import {
   Brain,
   Stethoscope,
   LayoutDashboard,
-  Layers, // ✅ ADICIONADO
+  Layers,
 } from 'lucide-react';
 import { useI18n } from '@/hooks/use-i18n';
+import { GlowBorder } from '@/components/ui/glow-border';
+import { cn } from '@/lib/utils';
 
 type Props = {
   project: Project;
   onClick: () => void;
+  className?: string;
 };
 
-// ✅ MAPA MELHORADO (SEM QUEBRAR SUA LÓGICA)
 const projectIconMap = {
-  fit: Brain, // melhor pra AI
+  fit: Brain,
   doctor: Stethoscope,
   ecommerce: ShoppingCart,
   analytics: BarChart3,
@@ -53,40 +62,104 @@ function getProjectIconKey(title: string): keyof typeof projectIconMap {
   return 'default';
 }
 
-export function ProjectCard({ project, onClick }: Props) {
+const TILT_SPRING = { stiffness: 260, damping: 22, mass: 0.4 };
+
+export function ProjectCard({ project, onClick, className }: Props) {
   const { locale } = useI18n();
   const iconKey = getProjectIconKey(project.title[locale]);
   const Icon = projectIconMap[iconKey];
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const rotateX = useSpring(
+    useTransform(pointerY, [-0.5, 0.5], [7, -7]),
+    TILT_SPRING,
+  );
+  const rotateY = useSpring(
+    useTransform(pointerX, [-0.5, 0.5], [-7, 7]),
+    TILT_SPRING,
+  );
+  const glareX = useSpring(
+    useTransform(pointerX, [-0.5, 0.5], [0, 100]),
+    TILT_SPRING,
+  );
+  const glareY = useSpring(
+    useTransform(pointerY, [-0.5, 0.5], [0, 100]),
+    TILT_SPRING,
+  );
+  const glareBackground = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(var(--glow) / 0.14), transparent 55%)`;
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
+    pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const resetTilt = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   return (
     <motion.div
+      ref={cardRef}
+      data-project-card
+      layoutId={`card-${project.id}`}
       onClick={onClick}
-      whileHover={{ scale: 1.03 }}
-      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className='cursor-hover group relative rounded-xl border border-border bg-card p-6 cursor-pointer transition-colors duration-300 hover:bg-muted/50'
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetTilt}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 900,
+        transformStyle: 'preserve-3d',
+      }}
+      whileTap={{ scale: 0.985 }}
+      className={cn('cursor-hover will-change-transform', className)}
     >
-      {/* HEADER */}
-      <div className='flex items-center gap-3'>
-        {/* ✅ MELHORIA VISUAL (badge) */}
-        <div className='p-2 rounded-md bg-primary/10'>
-          <Icon size={16} className='text-primary' />
-        </div>
-
-        <motion.h3
-          layoutId={`title-${project.id}`}
-          className='font-semibold text-lg'
-        >
-          {project.title[locale]}
-        </motion.h3>
-      </div>
-
-      {/* DESCRIPTION */}
-      <motion.p
-        layoutId={`desc-${project.id}`}
-        className='mt-2 text-sm text-muted-foreground'
+      <GlowBorder
+        innerClassName='h-full'
+        className='h-full transition-transform duration-300 group-hover/glow:-translate-y-0.5'
       >
-        {project.description[locale]}
-      </motion.p>
+        <div className='relative overflow-hidden rounded-[11px] border border-border/80 bg-card p-6 transition-colors duration-300 hover:bg-muted/40'>
+          <motion.div
+            aria-hidden
+            className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/glow:opacity-100'
+            style={{ background: glareBackground }}
+          />
+
+          <div className='relative' style={{ transform: 'translateZ(24px)' }}>
+            <div className='flex items-center gap-3'>
+              <div className='p-2 rounded-md bg-primary/10 ring-1 ring-primary/15'>
+                <Icon size={16} className='text-primary' />
+              </div>
+
+              <motion.h3
+                layoutId={`title-${project.id}`}
+                className='font-semibold text-lg leading-snug'
+              >
+                {project.title[locale]}
+              </motion.h3>
+            </div>
+
+            <motion.p
+              layoutId={`desc-${project.id}`}
+              className='mt-2 text-sm text-muted-foreground line-clamp-3'
+            >
+              {project.description[locale]}
+            </motion.p>
+
+            <p className='mt-4 text-xs font-medium text-muted-foreground/80 group-hover/glow:text-foreground transition-colors'>
+              {locale === 'pt' ? 'Ver detalhes' : 'View details'}
+              <span className='inline-block ml-1 transition-transform duration-300 group-hover/glow:translate-x-1'>
+                →
+              </span>
+            </p>
+          </div>
+        </div>
+      </GlowBorder>
     </motion.div>
   );
 }
