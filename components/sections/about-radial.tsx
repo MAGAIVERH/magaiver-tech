@@ -14,7 +14,7 @@ const CENTER = VIEW_SIZE / 2;
 
 export function AboutRadial() {
   const { locale, dict } = useI18n();
-  const { prefersReducedMotion } = useLenis();
+  const { prefersReducedMotion, isCoarsePointer } = useLenis();
   const [active, setActive] = useState<AboutItem | null>(null);
   const [hovered, setHovered] = useState<AboutItem | null>(null);
   const [radius, setRadius] = useState(170);
@@ -95,6 +95,7 @@ export function AboutRadial() {
       });
 
       orbitTlRef.current = tl;
+      tl.play();
 
       return () => {
         tl.kill();
@@ -136,6 +137,13 @@ export function AboutRadial() {
     };
   }, [hovered, prefersReducedMotion]);
 
+  useEffect(() => {
+    if (prefersReducedMotion || !isCoarsePointer) return;
+
+    setHovered(null);
+    orbitTlRef.current?.play();
+  }, [isCoarsePointer, prefersReducedMotion]);
+
   const handleIconEnter = (item: AboutItem) => {
     setHovered(item);
     pauseOrbit();
@@ -154,13 +162,36 @@ export function AboutRadial() {
     if (!hovered) resumeOrbit();
   };
 
+  const handleIconPointerEnter = (
+    item: AboutItem,
+    event: React.PointerEvent<HTMLButtonElement>,
+  ) => {
+    if (event.pointerType !== 'mouse') return;
+    handleIconEnter(item);
+  };
+
+  const handleIconPointerLeave = (event: React.PointerEvent<HTMLButtonElement>) => {
+    if (event.pointerType !== 'mouse') return;
+    handleIconLeave();
+  };
+
+  const handleOrbitPointerEnter = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse') return;
+    handleOrbitEnter();
+  };
+
+  const handleOrbitPointerLeave = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse') return;
+    handleOrbitLeave();
+  };
+
   return (
     <section ref={sectionRef} className='py-32 flex items-center justify-center relative overflow-x-clip'>
       <div className='relative flex items-center justify-center'>
         <div
           className='relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] md:w-[600px] md:h-[600px]'
-          onMouseEnter={handleOrbitEnter}
-          onMouseLeave={handleOrbitLeave}
+          onPointerEnter={handleOrbitPointerEnter}
+          onPointerLeave={handleOrbitPointerLeave}
         >
           {/* TEXTO CENTRAL */}
           <div className='absolute inset-0 flex flex-col items-center justify-center text-center z-10 pointer-events-none px-8 md:px-16'>
@@ -261,8 +292,8 @@ export function AboutRadial() {
                           else iconRefs.current.delete(item.id);
                         }}
                         onClick={() => setActive(item)}
-                        onMouseEnter={() => handleIconEnter(item)}
-                        onMouseLeave={handleIconLeave}
+                        onPointerEnter={(event) => handleIconPointerEnter(item, event)}
+                        onPointerLeave={handleIconPointerLeave}
                         aria-label={item.title[locale]}
                         className='
                           w-10 h-10 md:w-12 md:h-12

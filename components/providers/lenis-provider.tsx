@@ -108,6 +108,27 @@ export function LenisProvider({ children }: LenisProviderProps) {
     };
   }, [prefersReducedMotion, isCoarsePointer]);
 
+  useEffect(() => {
+    if (prefersReducedMotion || !isCoarsePointer) return;
+
+    let cancelled = false;
+    let onScroll: (() => void) | null = null;
+
+    void loadScrollTrigger().then((ScrollTrigger) => {
+      if (cancelled) return;
+
+      onScroll = () => ScrollTrigger.update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    });
+
+    return () => {
+      cancelled = true;
+      if (onScroll) {
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+  }, [prefersReducedMotion, isCoarsePointer]);
+
   const value = useMemo(
     () => ({ lenis, prefersReducedMotion, isCoarsePointer }),
     [lenis, prefersReducedMotion, isCoarsePointer],
