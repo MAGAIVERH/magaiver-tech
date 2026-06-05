@@ -18,6 +18,8 @@ export type Project = {
   github: string;
   linkedin: string;
   image?: string;
+  imageFit?: 'cover' | 'contain';
+  imageSize?: { width: number; height: number };
 };
 
 export const projects: Project[] = [
@@ -90,6 +92,8 @@ export const projects: Project[] = [
     linkedin:
       'https://www.linkedin.com/posts/magaiver-magalhaes_nextjs-typescript-prisma-ugcPost-7464465804370300928-kT7M/',
     image: '/pirillo-roriz.png',
+    imageFit: 'contain',
+    imageSize: { width: 1024, height: 494 },
   },
   {
     id: 'dr-agenda',

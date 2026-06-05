@@ -381,17 +381,32 @@ export function Projects() {
 
                   <motion.div
                     variants={modalItem}
-                    className='mt-4 h-56 md:h-72 rounded-lg border border-border overflow-hidden relative'
-                  >
-                    {selected.image && (
-                      <Image
-                        src={selected.image}
-                        alt={selected.title[locale]}
-                        fill
-                        className='object-cover'
-                        sizes='(max-width: 768px) 100vw, 36rem'
-                      />
+                    className={cn(
+                      'mt-4 rounded-lg border border-border overflow-hidden',
+                      selected.imageFit === 'contain'
+                        ? 'bg-muted/40'
+                        : 'relative h-56 md:h-72',
                     )}
+                  >
+                    {selected.image &&
+                      (selected.imageFit === 'contain' ? (
+                        <Image
+                          src={selected.image}
+                          alt={selected.title[locale]}
+                          width={selected.imageSize?.width ?? 1200}
+                          height={selected.imageSize?.height ?? 675}
+                          className='w-full h-auto'
+                          sizes='(max-width: 768px) 100vw, 36rem'
+                        />
+                      ) : (
+                        <Image
+                          src={selected.image}
+                          alt={selected.title[locale]}
+                          fill
+                          className='object-cover'
+                          sizes='(max-width: 768px) 100vw, 36rem'
+                        />
+                      ))}
                   </motion.div>
 
                   <motion.div
