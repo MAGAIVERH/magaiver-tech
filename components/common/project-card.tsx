@@ -58,6 +58,12 @@ function getProjectIconKey(title: string): keyof typeof projectIconMap {
   if (lower.includes('food') || lower.includes('meki')) return 'food';
   if (lower.includes('crowd')) return 'crowdfunding';
   if (lower.includes('personal')) return 'personal';
+  if (
+    lower.includes('pirillo') ||
+    lower.includes('academy') ||
+    lower.includes('jiu')
+  )
+    return 'personal';
 
   return 'default';
 }

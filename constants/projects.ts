@@ -1,12 +1,17 @@
+type LocalizedText = {
+  en: string;
+  pt: string;
+};
+
 export type Project = {
   id: string;
-  title: {
-    en: string;
-    pt: string;
-  };
-  description: {
-    en: string;
-    pt: string;
+  title: LocalizedText;
+  description: LocalizedText;
+  details?: {
+    overview: LocalizedText;
+    problem: LocalizedText;
+    solution: LocalizedText;
+    impact: LocalizedText;
   };
   stack: string[];
   live: string;
@@ -42,6 +47,49 @@ export const projects: Project[] = [
     linkedin:
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/fitai.png',
+  },
+  {
+    id: 'pirillo-roriz',
+    title: {
+      en: 'Pirillo Roriz',
+      pt: 'Pirillo Roriz',
+    },
+    description: {
+      en: 'I turned a real-world problem into a full-stack platform for Jiu-Jitsu academies — not just a CRUD, but a project driven by architectural decisions and UX refinement.',
+      pt: 'Transformei um problema real em uma plataforma full-stack para academias de Jiu-Jitsu — não apenas um CRUD, mas um projeto guiado por decisões arquiteturais e refinamento de UX.',
+    },
+    details: {
+      overview: {
+        en: 'Modular architecture with business logic split into independent modules (queries, actions, components), built to scale without becoming a maintenance nightmare.',
+        pt: 'Arquitetura modular com lógica de negócio dividida em módulos independentes (queries, actions, components), construída para escalar sem virar um pesadelo de manutenção.',
+      },
+      problem: {
+        en: 'Critical visual instability caused by Radix UI scroll-blocking (layout shift) and high visual noise in admin forms.',
+        pt: 'Instabilidade visual crítica causada pelo scroll-blocking do Radix UI (layout shift) e alto ruído visual nos formulários administrativos.',
+      },
+      solution: {
+        en: 'Next.js 15 (App Router) with global CSS + dynamic padding neutralization, Zod schema validation, and session-guarded Server Actions.',
+        pt: 'Next.js 15 (App Router) com CSS global + neutralização dinâmica de padding, validação com schemas Zod e Server Actions protegidas por sessão.',
+      },
+      impact: {
+        en: '100% stable navigation and ~30% reduction in form visual noise, with scheduling, finances, and attendance already handled.',
+        pt: 'Navegação 100% estável e ~30% de redução no ruído visual dos formulários, com agendamento, finanças e presença já funcionando.',
+      },
+    },
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Prisma',
+      'PostgreSQL',
+      'Zod',
+      'Radix UI',
+      'Tailwind',
+    ],
+    live: 'https://lnkd.in/ewC42ZEU',
+    github: 'https://github.com/MAGAIVERH/pirillo-roriz',
+    linkedin:
+      'https://www.linkedin.com/posts/magaiver-magalhaes_nextjs-typescript-prisma-ugcPost-7464465804370300928-kT7M/',
+    image: '/pirillo-roriz.png',
   },
   {
     id: 'dr-agenda',

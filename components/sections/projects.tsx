@@ -26,8 +26,9 @@ import {
   SiStripe,
   SiShadcnui,
   SiDrizzle,
+  SiRadixui,
 } from 'react-icons/si';
-import { Sparkles } from 'lucide-react';
+import { ShieldCheck, Sparkles } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import Image from 'next/image';
 import { useI18n } from '@/hooks/use-i18n';
@@ -51,6 +52,8 @@ const techIcons: Record<string, IconType> = {
   Stripe: SiStripe,
   Shadcnui: SiShadcnui,
   Drizzle: SiDrizzle,
+  Zod: ShieldCheck,
+  'Radix UI': SiRadixui,
 };
 
 const modalContainer = {
@@ -397,19 +400,23 @@ export function Projects() {
                   >
                     <p>
                       <strong>{dict.projects.modal.overviewTitle}:</strong>{' '}
-                      {dict.projects.modal.overview}
+                      {selected.details?.overview[locale] ??
+                        dict.projects.modal.overview}
                     </p>
                     <p>
                       <strong>{dict.projects.modal.problemTitle}:</strong>{' '}
-                      {dict.projects.modal.problem}
+                      {selected.details?.problem[locale] ??
+                        dict.projects.modal.problem}
                     </p>
                     <p>
                       <strong>{dict.projects.modal.solutionTitle}:</strong>{' '}
-                      {dict.projects.modal.solution}
+                      {selected.details?.solution[locale] ??
+                        dict.projects.modal.solution}
                     </p>
                     <p>
                       <strong>{dict.projects.modal.impactTitle}:</strong>{' '}
-                      {dict.projects.modal.impact}
+                      {selected.details?.impact[locale] ??
+                        dict.projects.modal.impact}
                     </p>
                   </motion.div>
 
