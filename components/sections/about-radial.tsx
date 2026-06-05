@@ -7,6 +7,7 @@ import { useGSAP } from '@gsap/react';
 import { AboutItem, aboutItems } from '@/constants/about-items';
 import { useI18n } from '@/hooks/use-i18n';
 import { useLenis } from '@/components/providers/lenis-provider';
+import { isMobileExperience } from '@/lib/mobile-experience';
 
 const ORBIT_DURATION = 60;
 const VIEW_SIZE = 600;
@@ -62,8 +63,13 @@ export function AboutRadial() {
       const arms = group.querySelectorAll<HTMLElement>('[data-orbit-arm]');
       const counters = group.querySelectorAll<HTMLElement>('[data-orbit-counter]');
       const lines = group.querySelectorAll<SVGLineElement>('.about-connection-line');
+      const mobileExperience = isMobileExperience();
 
-      const tl = gsap.timeline({ repeat: -1 });
+      if (mobileExperience) {
+        gsap.set([...arms, ...counters], { force3D: true });
+      }
+
+      const tl = gsap.timeline({ repeat: -1, paused: false });
       arms.forEach((arm) => {
         tl.to(
           arm,
@@ -97,12 +103,22 @@ export function AboutRadial() {
       orbitTlRef.current = tl;
       tl.play();
 
+      if (mobileExperience) {
+        gsap.ticker.wake();
+        requestAnimationFrame(() => {
+          orbitTlRef.current?.play();
+        });
+      }
+
       return () => {
         tl.kill();
         orbitTlRef.current = null;
       };
     },
-    { scope: sectionRef, dependencies: [radius, prefersReducedMotion] },
+    {
+      scope: sectionRef,
+      dependencies: [radius, prefersReducedMotion, isCoarsePointer],
+    },
   );
 
   useEffect(() => {
@@ -141,7 +157,16 @@ export function AboutRadial() {
     if (prefersReducedMotion || !isCoarsePointer) return;
 
     setHovered(null);
-    orbitTlRef.current?.play();
+
+    const wakeOrbit = () => {
+      orbitTlRef.current?.play();
+      gsap.ticker.wake();
+    };
+
+    wakeOrbit();
+    const rafId = requestAnimationFrame(wakeOrbit);
+
+    return () => cancelAnimationFrame(rafId);
   }, [isCoarsePointer, prefersReducedMotion]);
 
   const handleIconEnter = (item: AboutItem) => {

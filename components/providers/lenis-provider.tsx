@@ -33,12 +33,18 @@ type LenisProviderProps = {
 
 export function LenisProvider({ children }: LenisProviderProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+  const [isCoarsePointer, setIsCoarsePointer] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(pointer: coarse), (hover: none)').matches;
+  });
 
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const pointerQuery = window.matchMedia('(pointer: coarse)');
+    const pointerQuery = window.matchMedia('(pointer: coarse), (hover: none)');
 
     const syncMotion = () => setPrefersReducedMotion(motionQuery.matches);
     const syncPointer = () => setIsCoarsePointer(pointerQuery.matches);

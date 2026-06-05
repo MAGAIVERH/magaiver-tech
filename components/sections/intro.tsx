@@ -6,11 +6,13 @@ import { useGSAP } from '@gsap/react';
 import { useI18n } from '@/hooks/use-i18n';
 import { useLenis } from '@/components/providers/lenis-provider';
 import { loadScrollTrigger } from '@/lib/gsap-scroll-trigger';
+import { isMobileExperience } from '@/lib/mobile-experience';
 import { cn } from '@/lib/utils';
 
 const REVEAL_START = 'top 85%';
 const REVEAL_EASE = 'power3.out';
 const FOCUS_VIEWPORT_RATIO = 0.52;
+const MOBILE_FOCUS_VIEWPORT_RATIO = 0.4;
 const INACTIVE_OPACITY = 0.38;
 const INACTIVE_Y = 6;
 
@@ -49,6 +51,8 @@ export function Intro() {
 
       let cancelled = false;
       let activeIndex = -1;
+      let mobileScrollRaf = 0;
+      let mobileScrollHandler: (() => void) | null = null;
       let focusTrigger: ReturnType<
         Awaited<ReturnType<typeof loadScrollTrigger>>['create']
       > | null = null;
@@ -71,8 +75,14 @@ export function Intro() {
         });
       };
 
+      const mobileExperience = isMobileExperience();
+
       const updateFocusFromScroll = () => {
-        const viewportCenter = window.innerHeight * FOCUS_VIEWPORT_RATIO;
+        const viewportCenter =
+          window.innerHeight *
+          (mobileExperience
+            ? MOBILE_FOCUS_VIEWPORT_RATIO
+            : FOCUS_VIEWPORT_RATIO);
         const sectionRect = section.getBoundingClientRect();
 
         if (
@@ -166,11 +176,37 @@ export function Intro() {
           end: 'bottom top',
           onUpdate: updateFocusFromScroll,
         });
+
+        if (mobileExperience) {
+          mobileScrollHandler = () => {
+            cancelAnimationFrame(mobileScrollRaf);
+            mobileScrollRaf = requestAnimationFrame(() => {
+              ScrollTrigger.update();
+              updateFocusFromScroll();
+            });
+          };
+
+          window.addEventListener('scroll', mobileScrollHandler, {
+            passive: true,
+          });
+          window.addEventListener('touchmove', mobileScrollHandler, {
+            passive: true,
+          });
+
+          ScrollTrigger.refresh();
+          updateFocusFromScroll();
+        }
       });
 
       return () => {
         cancelled = true;
         focusTrigger?.kill();
+
+        if (mobileScrollHandler) {
+          window.removeEventListener('scroll', mobileScrollHandler);
+          window.removeEventListener('touchmove', mobileScrollHandler);
+          cancelAnimationFrame(mobileScrollRaf);
+        }
       };
     },
     {
