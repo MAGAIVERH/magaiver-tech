@@ -63,8 +63,8 @@ export const projects: Project[] = [
   {
     id: 'pirillo-roriz',
     title: {
-      en: 'Pirillo Roriz',
-      pt: 'Pirillo Roriz',
+      en: 'Jiu Jitsu Academy',
+      pt: 'Academia de Jiu Jitsu',
     },
     description: {
       en: 'Real academies needed more than CRUD. I built a production full-stack platform for Jiu-Jitsu operations with modular architecture, secured Server Actions, and UX engineering that eliminated layout shift and cut admin form noise by 30%. Scheduling, finances, and attendance already live.',
