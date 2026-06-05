@@ -20,6 +20,16 @@ export type Project = {
   image?: string;
   imageFit?: 'cover' | 'contain';
   imageSize?: { width: number; height: number };
+  modalExtra?: {
+    mvpNote: LocalizedText;
+    testInvite: LocalizedText;
+    visualNote: LocalizedText;
+    credentials: Array<{
+      role: LocalizedText;
+      email: string;
+      password: string;
+    }>;
+  };
 };
 
 export const projects: Project[] = [
@@ -87,13 +97,44 @@ export const projects: Project[] = [
       'Radix UI',
       'Tailwind',
     ],
-    live: 'https://lnkd.in/ewC42ZEU',
+    live: 'https://academia-jiu-jitsu-theta.vercel.app/',
     github: 'https://github.com/MAGAIVERH/pirillo-roriz',
     linkedin:
       'https://www.linkedin.com/posts/magaiver-magalhaes_nextjs-typescript-prisma-ugcPost-7464465804370300928-kT7M/',
     image: '/pirillo-roriz.png',
     imageFit: 'contain',
     imageSize: { width: 1024, height: 494 },
+    modalExtra: {
+      mvpNote: {
+        en: 'Early stage MVP in active development. Scheduling, finances, and attendance already work, with much more on the roadmap. An honest snapshot of my current level, not a finished product.',
+        pt: 'MVP em estágio inicial e em evolução ativa. Agendamento, finanças e presença já funcionam, com muito mais no roadmap. Um retrato honesto do meu nível atual, não um produto finalizado.',
+      },
+      testInvite: {
+        en: 'Want to test it? Open Live and share your feedback.',
+        pt: 'Quer testar? Acesse Live e compartilhe seu feedback.',
+      },
+      visualNote: {
+        en: 'Fully dark mode with a premium visual identity.',
+        pt: '100% dark mode com identidade visual premium.',
+      },
+      credentials: [
+        {
+          role: { en: 'Admin', pt: 'Admin' },
+          email: 'admin@testeacademia.com',
+          password: 'testeacademia@2026',
+        },
+        {
+          role: { en: 'Student', pt: 'Aluno' },
+          email: 'teststudent@oi.com',
+          password: 'Ugf3!qNM83',
+        },
+        {
+          role: { en: 'Teacher', pt: 'Professor' },
+          email: 'testteacher@oi.com',
+          password: 'cuT##aX2M#',
+        },
+      ],
+    },
   },
   {
     id: 'dr-agenda',

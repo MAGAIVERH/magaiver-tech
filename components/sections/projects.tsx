@@ -435,6 +435,27 @@ export function Projects() {
                     </p>
                   </motion.div>
 
+                  {selected.modalExtra && (
+                    <motion.div
+                      variants={modalItem}
+                      className='mt-4 space-y-3 rounded-lg border border-border/80 bg-muted/30 p-4 text-xs md:text-sm text-muted-foreground'
+                    >
+                      <p>{selected.modalExtra.mvpNote[locale]}</p>
+                      <p className='font-medium text-foreground/90'>
+                        {selected.modalExtra.testInvite[locale]}
+                      </p>
+                      <p>{selected.modalExtra.visualNote[locale]}</p>
+                      <ul className='space-y-1.5'>
+                        {selected.modalExtra.credentials.map((credential) => (
+                          <li key={credential.email}>
+                            <strong>{credential.role[locale]}:</strong>{' '}
+                            {credential.email} / {credential.password}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+
                   <motion.div
                     variants={modalItem}
                     className='mt-4 flex flex-wrap gap-2'
