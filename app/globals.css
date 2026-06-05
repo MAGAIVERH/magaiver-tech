@@ -28,7 +28,7 @@
   --spot-primary: 15 23 42;
   --spot-accent: 99 102 241;
 
-  --about-line-opacity: 0.22;
+  --about-line-opacity: 0.42;
 
   --z-cursor: 45;
   --z-spotlight: 25;
@@ -60,7 +60,7 @@
   --spot-primary: 255 255 255;
   --spot-accent: 180 180 255;
 
-  --about-line-opacity: 0.15;
+  --about-line-opacity: 0.2;
 }
 
 body {
@@ -225,7 +225,7 @@ body {
 
 .about-radial-lines .about-connection-line {
   stroke: rgb(var(--foreground) / var(--about-line-opacity));
-  stroke-width: 1.25;
+  stroke-width: 1.35;
   stroke-linecap: round;
 }
 

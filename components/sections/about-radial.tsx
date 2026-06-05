@@ -19,6 +19,7 @@ export function AboutRadial() {
   const [active, setActive] = useState<AboutItem | null>(null);
   const [hovered, setHovered] = useState<AboutItem | null>(null);
   const [radius, setRadius] = useState(170);
+  const [containerSize, setContainerSize] = useState(300);
 
   const sectionRef = useRef<HTMLElement>(null);
   const orbitGroupRef = useRef<HTMLDivElement>(null);
@@ -27,16 +28,24 @@ export function AboutRadial() {
   const iconRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   useEffect(() => {
-    function updateRadius() {
+    function updateOrbitMetrics() {
       const width = window.innerWidth;
+
+      if (width >= 768) setContainerSize(600);
+      else if (width >= 640) setContainerSize(420);
+      else setContainerSize(300);
+
       if (width >= 1024) setRadius(260);
       else if (width >= 640) setRadius(180);
       else setRadius(170);
     }
-    updateRadius();
-    window.addEventListener('resize', updateRadius);
-    return () => window.removeEventListener('resize', updateRadius);
+
+    updateOrbitMetrics();
+    window.addEventListener('resize', updateOrbitMetrics);
+    return () => window.removeEventListener('resize', updateOrbitMetrics);
   }, []);
+
+  const viewBoxRadius = radius * (VIEW_SIZE / containerSize);
 
   const pauseOrbit = useCallback(() => {
     orbitTlRef.current?.pause();
@@ -117,7 +126,7 @@ export function AboutRadial() {
     },
     {
       scope: sectionRef,
-      dependencies: [radius, prefersReducedMotion, isCoarsePointer],
+      dependencies: [radius, containerSize, prefersReducedMotion, isCoarsePointer],
     },
   );
 
@@ -273,8 +282,8 @@ export function AboutRadial() {
             >
               {aboutItems.map((_, index) => {
                 const angle = (index / aboutItems.length) * 2 * Math.PI;
-                const x2 = CENTER + Math.cos(angle) * radius;
-                const y2 = CENTER + Math.sin(angle) * radius;
+                const x2 = CENTER + Math.cos(angle) * viewBoxRadius;
+                const y2 = CENTER + Math.sin(angle) * viewBoxRadius;
                 return (
                   <line
                     key={index}
