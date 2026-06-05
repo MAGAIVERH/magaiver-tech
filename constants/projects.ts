@@ -55,8 +55,8 @@ export const projects: Project[] = [
       pt: 'Pirillo Roriz',
     },
     description: {
-      en: 'I turned a real-world problem into a full-stack platform for Jiu-Jitsu academies — not just a CRUD, but a project driven by architectural decisions and UX refinement.',
-      pt: 'Transformei um problema real em uma plataforma full-stack para academias de Jiu-Jitsu — não apenas um CRUD, mas um projeto guiado por decisões arquiteturais e refinamento de UX.',
+      en: 'Real academies needed more than CRUD. I built a production full-stack platform for Jiu-Jitsu operations with modular architecture, secured Server Actions, and UX engineering that eliminated layout shift and cut admin form noise by 30%. Scheduling, finances, and attendance already live.',
+      pt: 'Academias reais precisavam de mais que CRUD. Construí uma plataforma full-stack em produção para operações de Jiu-Jitsu com arquitetura modular, Server Actions protegidas e engenharia de UX que eliminou layout shift e reduziu o ruído visual dos formulários em 30%. Agendamento, finanças e presença já em operação.',
     },
     details: {
       overview: {
