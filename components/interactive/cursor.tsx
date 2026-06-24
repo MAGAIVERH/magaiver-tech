@@ -28,6 +28,8 @@ export function Cursor() {
     const finePointer = window.matchMedia('(pointer: fine)');
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+    // Pointer capability is only knowable on the client; sync once on mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setEnabled(finePointer.matches);
     reducedMotion.current = motionQuery.matches;
 

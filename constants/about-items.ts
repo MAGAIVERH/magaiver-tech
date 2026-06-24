@@ -1,6 +1,7 @@
 export type AboutItem = {
   id: string;
   icon: string;
+  iconKey: string;
   label: {
     en: string;
     pt: string;
@@ -31,6 +32,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'performance',
     icon: '⚡',
+    iconKey: 'zap',
     label: { en: 'Performance', pt: 'Performance' },
     title: { en: 'Performance Engineering', pt: 'Engenharia de Performance' },
     metric: { en: '-48% load time', pt: '-48% tempo de carregamento' },
@@ -51,6 +53,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'saas',
     icon: '📦',
+    iconKey: 'layers',
     label: { en: 'SaaS', pt: 'SaaS' },
     title: { en: 'SaaS Architecture', pt: 'Arquitetura SaaS' },
     metric: { en: '+120% scalability', pt: '+120% escalabilidade' },
@@ -71,6 +74,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'ai',
     icon: '🤖',
+    iconKey: 'brain',
     label: { en: 'AI', pt: 'IA' },
     title: { en: 'AI Integration', pt: 'Integração com IA' },
     metric: { en: '+65% automation', pt: '+65% automação' },
@@ -91,6 +95,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'backend',
     icon: '🖥',
+    iconKey: 'server',
     label: { en: 'Backend', pt: 'Backend' },
     title: { en: 'Backend Optimization', pt: 'Otimização de Backend' },
     metric: { en: '-35% response time', pt: '-35% tempo de resposta' },
@@ -111,6 +116,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'database',
     icon: '🗄',
+    iconKey: 'database',
     label: { en: 'Database', pt: 'Banco' },
     title: { en: 'Database Optimization', pt: 'Banco de Dados' },
     metric: { en: '+40% efficiency', pt: '+40% eficiência' },
@@ -131,6 +137,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'frontend',
     icon: '🎨',
+    iconKey: 'code',
     label: { en: 'Frontend', pt: 'Frontend' },
     title: { en: 'Frontend Architecture', pt: 'Frontend' },
     metric: { en: '+30% task completion', pt: '+30% conclusão de tarefas' },
@@ -151,6 +158,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'analytics',
     icon: '📊',
+    iconKey: 'chart',
     label: { en: 'Analytics', pt: 'Analytics' },
     title: { en: 'Analytics Systems', pt: 'Analytics' },
     metric: { en: '+50% decision speed', pt: '+50% velocidade de decisão' },
@@ -171,6 +179,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'infra',
     icon: '🔧',
+    iconKey: 'cloud',
     label: { en: 'Infra', pt: 'Infra' },
     title: { en: 'Infrastructure', pt: 'Infraestrutura' },
     metric: { en: '+70% uptime reliability', pt: '+70% confiabilidade' },
@@ -191,6 +200,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'api',
     icon: '🔌',
+    iconKey: 'network',
     label: { en: 'API', pt: 'API' },
     title: { en: 'API Design', pt: 'Design de APIs' },
     metric: {
@@ -214,6 +224,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'growth',
     icon: '🚀',
+    iconKey: 'rocket',
     label: { en: 'Growth', pt: 'Growth' },
     title: { en: 'Growth Engineering', pt: 'Growth' },
     metric: { en: '+30% activation rate', pt: '+30% taxa de ativação' },
@@ -234,6 +245,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'monitoring',
     icon: '📡',
+    iconKey: 'radar',
     label: { en: 'Monitoring', pt: 'Monitoramento' },
     title: { en: 'Observability Systems', pt: 'Observabilidade' },
     metric: { en: '-74% mean time to resolve', pt: '-74% tempo de resolução' },
@@ -254,6 +266,7 @@ export const aboutItems: AboutItem[] = [
   {
     id: 'data',
     icon: '🔀',
+    iconKey: 'flow',
     label: { en: 'Data', pt: 'Dados' },
     title: { en: 'Data Pipeline Optimization', pt: 'Pipeline de Dados' },
     metric: { en: '-82% processing time', pt: '-82% tempo de processamento' },

@@ -137,7 +137,10 @@ export function ProjectCard({ project, onClick, className }: Props) {
           : undefined
       }
       whileTap={{ scale: 0.985 }}
-      className={cn('cursor-hover will-change-transform', className)}
+      className={cn(
+        'cursor-hover relative z-0 will-change-transform hover:z-20 focus-within:z-20',
+        className,
+      )}
     >
       <GlowBorder
         innerClassName='h-full'

@@ -15,46 +15,16 @@ import { Reveal } from '@/components/common/reveal';
 import { ProjectCard } from '@/components/common/project-card';
 import { projects, type Project } from '@/constants/projects';
 import { FiExternalLink, FiX } from 'react-icons/fi';
-import { FaGithub, FaLinkedin, FaReact, FaNodeJs } from 'react-icons/fa';
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiPrisma,
-  SiPostgresql,
-  SiFastify,
-  SiTailwindcss,
-  SiStripe,
-  SiShadcnui,
-  SiDrizzle,
-  SiRadixui,
-} from 'react-icons/si';
-import { ShieldCheck, Sparkles } from 'lucide-react';
-import type { IconType } from 'react-icons';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
 import { useI18n } from '@/hooks/use-i18n';
 import { useScrollTo } from '@/hooks/use-scroll-to';
 import { useLenis } from '@/components/providers/lenis-provider';
 import { cn } from '@/lib/utils';
+import { techIcons } from '@/lib/tech-icons';
 import { loadScrollTrigger, refreshScrollTrigger } from '@/lib/gsap-scroll-trigger';
 
 const INITIAL_VISIBLE = 4;
-
-const techIcons: Record<string, IconType> = {
-  React: FaReact,
-  'Next.js': SiNextdotjs,
-  Node: FaNodeJs,
-  TypeScript: SiTypescript,
-  Prisma: SiPrisma,
-  PostgreSQL: SiPostgresql,
-  Fastify: SiFastify,
-  AI: Sparkles,
-  Tailwind: SiTailwindcss,
-  Stripe: SiStripe,
-  Shadcnui: SiShadcnui,
-  Drizzle: SiDrizzle,
-  Zod: ShieldCheck,
-  'Radix UI': SiRadixui,
-};
 
 const modalContainer = {
   hidden: { opacity: 0 },

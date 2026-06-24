@@ -71,6 +71,8 @@ export function LenisProvider({ children }: LenisProviderProps) {
 
   useEffect(() => {
     if (prefersReducedMotion || isCoarsePointer) {
+      // Tear down smooth scroll when motion/pointer prefs disallow it.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLenis(null);
       return;
     }

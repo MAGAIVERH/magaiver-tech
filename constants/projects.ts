@@ -34,14 +34,14 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: 'fit-ai',
+    id: 'online-store',
     title: {
-      en: 'FitAI',
-      pt: 'FitAI',
+      en: 'Bewear — Online Store (E-commerce)',
+      pt: 'Bewear — Loja online (E-commerce)',
     },
     description: {
-      en: 'Full-stack AI-powered workout platform that generates personalized training plans and tracks user performance. Built with a modern architecture separating frontend and API, including authentication, real-time interactions, and AI integration for dynamic plan generation.',
-      pt: 'Plataforma de treino completa, com inteligência artificial, que gera planos de treino personalizados e monitoriza o desempenho do utilizador. Construída com uma arquitetura moderna que separa o frontend da API, incluindo autenticação, interações em tempo real e integração de IA para geração dinâmica de planos.',
+      en: 'Interactive e-commerce application built with React and Next.js, focusing on reusable components, performance, and modern frontend architecture.',
+      pt: 'Aplicativo de comércio eletrônico interativo desenvolvido com React e Next.js, com foco em componentes reutilizáveis, desempenho e arquitetura de front-end moderna.',
     },
     stack: [
       'Next.js',
@@ -49,16 +49,15 @@ export const projects: Project[] = [
       'TypeScript',
       'Tailwind',
       'Shadcnui',
-      'Fastify',
       'Prisma',
       'PostgreSQL',
-      'AI',
+      'Stripe',
     ],
-    live: 'https://treinos-frontend-gold.vercel.app/auth',
-    github: 'https://github.com/MAGAIVERH/treinos-frontend',
+    live: 'https://bewear-navy.vercel.app/',
+    github: 'https://github.com/MAGAIVERH/BEWEAR',
     linkedin:
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
-    image: '/fitai.png',
+    image: '/bewear-ecommerce.png',
   },
   {
     id: 'pirillo-roriz',
@@ -137,6 +136,33 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'fit-ai',
+    title: {
+      en: 'FitAI',
+      pt: 'FitAI',
+    },
+    description: {
+      en: 'Full-stack AI-powered workout platform that generates personalized training plans and tracks user performance. Built with a modern architecture separating frontend and API, including authentication, real-time interactions, and AI integration for dynamic plan generation.',
+      pt: 'Plataforma de treino completa, com inteligência artificial, que gera planos de treino personalizados e monitoriza o desempenho do utilizador. Construída com uma arquitetura moderna que separa o frontend da API, incluindo autenticação, interações em tempo real e integração de IA para geração dinâmica de planos.',
+    },
+    stack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind',
+      'Shadcnui',
+      'Fastify',
+      'Prisma',
+      'PostgreSQL',
+      'AI',
+    ],
+    live: 'https://treinos-frontend-gold.vercel.app/auth',
+    github: 'https://github.com/MAGAIVERH/treinos-frontend',
+    linkedin:
+      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
+    image: '/fitai.png',
+  },
+  {
     id: 'dr-agenda',
     title: {
       en: 'Dr. Schedule',
@@ -146,7 +172,6 @@ export const projects: Project[] = [
       en: 'Complete SaaS platform for clinic management, focused on scheduling, financial control, and operational efficiency. Includes authentication, dashboard, appointment flow, and Stripe integration for billing and subscriptions.',
       pt: 'Plataforma SaaS completa para gestão de clínicas, focada em agendamento, controle financeiro e eficiência operacional. Inclui autenticação, painel de controle, fluxo de consultas e integração com o Stripe para faturamento e assinaturas.',
     },
-
     stack: [
       'Next.js',
       'React',
@@ -189,7 +214,6 @@ export const projects: Project[] = [
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/personal.png',
   },
-
   {
     id: 'saas-platform',
     title: {
@@ -216,18 +240,6 @@ export const projects: Project[] = [
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/minha-plataforma.png',
   },
-  // {
-  //   id: 'ecommerce-production',
-  //   title: 'E-commerce Platform (Production)',
-  //   description:
-  //     'Production-ready e-commerce platform with complete purchase flow, product management, and responsive UI. Built focusing on performance, scalability, and real-world usability.',
-  //   stack: ['Next.js', 'React', 'TypeScript'],
-  //   live: 'https://loja-online-next.vercel.app/',
-  //   github: 'https://github.com/MAGAIVERH/loja-online',
-  //   linkedin:
-  //     'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
-  //   image: '/loja-online-product.png',
-  // },
   {
     id: 'tattoo-booking',
     title: {
@@ -253,30 +265,6 @@ export const projects: Project[] = [
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/tatoo-shop.png',
   },
-
-  // {
-  //   id: 'ai-scheduling',
-  //   title: 'AI Scheduling Platform',
-  //   description:
-  //     'AI-powered scheduling platform combining traditional booking systems with conversational AI. Designed to automate scheduling workflows and improve user interaction efficiency.',
-  //   stack: ['Next.js', 'React', 'AI'],
-  //   live: '#',
-  //   github: '#',
-  //   linkedin: 'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
-  //   image: '/projects/ai-scheduling.png',
-  // },
-
-  // {
-  //   id: 'ai-scheduling',
-  //   title: 'AI Scheduling Platform',
-  //   description:
-  //     'AI-powered scheduling platform combining traditional booking systems with conversational AI. Designed to automate scheduling workflows and improve user interaction efficiency.',
-  //   stack: ['Next.js', 'React', 'AI'],
-  //   live: '#',
-  //   github: '#',
-  //   linkedin: 'https://www.linkedin.com/in/magaiver-magalhaes-bb9572234/details/experience/',
-  //   image: '/projects/ai-scheduling.png',
-  // },
   {
     id: 'crowdfunding',
     title: {
@@ -303,7 +291,6 @@ export const projects: Project[] = [
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/bjjfund.png',
   },
-
   {
     id: 'food-delivery',
     title: {
@@ -311,8 +298,8 @@ export const projects: Project[] = [
       pt: 'Plataforma de entrega de alimentos',
     },
     description: {
-      en: 'Frontend-focused food delivery application simulating real-world ordering systems with interactive UI and responsive design.',
-      pt: 'Aplicativo de entrega de comida com foco na interface do usuário, simulando sistemas de pedidos do mundo real com interface interativa e design responsivo.',
+      en: "A dynamic, frontend-focused food delivery application designed to simulate real-world ordering systems. It features a highly interactive user interface, efficient state management, and a fully responsive design tailored for seamless cross-device browsing.",
+      pt: "Aplicativo dinâmico de entrega de comida com foco no desenvolvimento frontend, projetado para simular sistemas de pedidos do mundo real. Conta com uma interface de usuário altamente interativa, gerenciamento eficiente de estado e design totalmente responsivo para uma experiência fluida em qualquer dispositivo.",
     },
     stack: [
       'Next.js',
@@ -329,32 +316,6 @@ export const projects: Project[] = [
     linkedin:
       'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
     image: '/mmfood.png',
-  },
-  {
-    id: 'online-store',
-    title: {
-      en: 'Online Store (E-commerce)',
-      pt: 'Loja online (comércio eletrônico)',
-    },
-    description: {
-      en: 'Interactive e-commerce application built with React and Next.js, focusing on reusable components, performance, and modern frontend architecture.',
-      pt: 'Aplicativo de comércio eletrônico interativo desenvolvido com React e Next.js, com foco em componentes reutilizáveis, desempenho e arquitetura de front-end moderna.',
-    },
-    stack: [
-      'Next.js',
-      'React',
-      'TypeScript',
-      'Tailwind',
-      'Shadcnui',
-      'Prisma',
-      'PostgreSQL',
-      'Stripe',
-    ],
-    live: 'https://bewear-navy.vercel.app/',
-    github: 'https://github.com/MAGAIVERH/BEWEAR',
-    linkedin:
-      'https://www.linkedin.com/in/magaiver-magalhaes/details/experience/',
-    image: '/bewear-ecommerce.png',
   },
   {
     id: 'auto-meki',

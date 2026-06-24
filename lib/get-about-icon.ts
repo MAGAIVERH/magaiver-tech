@@ -6,14 +6,19 @@ import {
   Database,
   Code,
   BarChart3,
-  Settings,
-  Cpu,
+  Cloud,
+  Network,
   Rocket,
-  Activity,
+  RadioTower,
   Workflow,
+  type LucideIcon,
 } from 'lucide-react';
 
-export function getAboutIcon(icon: string) {
+/**
+ * Maps a stable string key to a professional lucide glyph. Replaces the old
+ * emoji set so the skills orbit reads as credible engineering, not decoration.
+ */
+export function getAboutIcon(icon: string): LucideIcon {
   switch (icon) {
     case 'zap':
       return Zap;
@@ -29,14 +34,14 @@ export function getAboutIcon(icon: string) {
       return Code;
     case 'chart':
       return BarChart3;
-    case 'settings':
-      return Settings;
-    case 'cpu':
-      return Cpu;
+    case 'cloud':
+      return Cloud;
+    case 'network':
+      return Network;
     case 'rocket':
       return Rocket;
-    case 'activity':
-      return Activity;
+    case 'radar':
+      return RadioTower;
     case 'flow':
       return Workflow;
     default:

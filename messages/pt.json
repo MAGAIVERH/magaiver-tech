@@ -1,17 +1,59 @@
 {
   "hero": {
-    "title": "Construindo aplicações web escaláveis e performáticas",
-    "subtitle": "Engenheiro Full Stack focado em performance, arquitetura e experiência do usuário.",
+    "badge": "Disponível para vagas sênior & remotas",
+    "roles": [
+      "Engenheiro Full Stack",
+      "Arquiteto de SaaS Multi-Tenant",
+      "Engenheiro de Plataformas de IA",
+      "Especialista em Frontend"
+    ],
+    "title": "Construo plataformas escaláveis que movem métricas de negócio reais.",
+    "subtitle": "Engenheiro Full Stack com mais de 5 anos entregando SaaS multi-tenant e produtos com IA de ponta a ponta — Next.js, TypeScript, Node.js e PostgreSQL.",
     "cta": "Ver Projetos",
-    "contact": "Contato"
+    "contact": "Fale comigo",
+    "downloadCv": "Baixar CV",
+    "scroll": "Role para explorar"
+  },
+  "stats": {
+    "title": "Em números",
+    "subtitle": "Sinais de trabalho real, pronto para produção — não demos de brinquedo."
+  },
+  "marquee": {
+    "title": "A stack com que eu construo"
+  },
+  "featured": {
+    "eyebrow": "Projeto principal",
+    "viewProject": "Ver ao vivo",
+    "viewCode": "Código-fonte",
+    "highlightsTitle": "Destaques de engenharia",
+    "inDevelopment": "Em desenvolvimento ativo",
+    "architectureTitle": "Arquitetura ao vivo",
+    "arch": {
+      "caption": "Um comprador busca no marketplace, a sua consulta chega a uma imobiliária como lead, e o core seguro orquestra tudo em tempo real.",
+      "multiTenant": "Multi-tenant",
+      "buyers": "Compradores",
+      "buyersSub": "buscam e consultam",
+      "brokerages": "Imobiliárias",
+      "brokeragesSub": "publicam e gerem",
+      "marketplace": "Marketplace Público",
+      "marketplaceSub": "busca · anúncios · leads",
+      "coreSub": "API segura · RBAC",
+      "edgeSearch": "busca",
+      "edgeLeads": "leads & anúncios",
+      "edgeApi": "API segura",
+      "edgeDashboard": "painel",
+      "rls": "Row-Level Security",
+      "semantic": "Busca semântica",
+      "asyncJobs": "Jobs assíncronos"
+    }
   },
   "intro": {
     "title": "Sobre mim",
-    "p1": "Sou Magaiver, desenvolvedor Full Stack com mais de 4 anos de experiência construindo aplicações web escaláveis e performáticas.",
-    "p2": "Atuo de ponta a ponta no frontend e backend, desenhando arquiteturas, modelando bancos de dados e entregando sistemas prontos para produção. Minha stack principal inclui Next.js, React, TypeScript, Node.js, Fastify, Express, PostgreSQL e Prisma ou Drizzle como ORM.",
-    "p3": "Já desenvolvi plataformas SaaS, dashboards operacionais e sistemas orientados a API com foco em performance, manutenibilidade e arquitetura limpa.",
-    "p4": "Também integro IA em produtos utilizando LLMs, MCPs e ACPs para melhorar a experiência do usuário e automatizar fluxos complexos.",
-    "p5": "Meu objetivo é construir sistemas que gerem impacto real no negócio, unindo qualidade técnica, escalabilidade e foco no usuário."
+    "p1": "Sou Magaiver, Engenheiro de Software Full Stack com mais de 5 anos de experiência projetando e construindo plataformas SaaS escaláveis e produtos com IA.",
+    "p2": "Atuo de ponta a ponta no frontend e backend — desenhando arquiteturas, modelando bancos de dados e entregando sistemas em produção. Minha stack principal é Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL e Drizzle ou Prisma.",
+    "p3": "Atualmente construo o PropAI OS, um sistema operacional multi-tenant para o setor imobiliário dos EUA — isolamento de tenants com PostgreSQL Row-Level Security, busca semântica com pgvector e um pipeline de IA assíncrono em BullMQ.",
+    "p4": "Aplico Clean Architecture, DDD e design API-first, e integro LLMs, visão computacional e embeddings em fluxos prontos para produção e com custo controlado.",
+    "p5": "Meu objetivo é construir sistemas que geram impacto real no negócio — unindo qualidade técnica, escalabilidade e um foco obstinado no usuário."
   },
   "projects": {
     "title": "Projetos selecionados",
@@ -38,9 +80,21 @@
       "result": "Resultado"
     }
   },
+  "expertise": {
+    "eyebrow": "Impacto comprovado",
+    "title": "Problemas de engenharia que resolvi",
+    "subtitle": "Cada capacidade abaixo é um problema real levado de ponta a ponta — com o resultado mensurável que gerou. Abra qualquer card para ver o estudo de caso completo.",
+    "cta": "Ver estudo de caso",
+    "problemLabel": "O problema",
+    "modal": {
+      "problem": "Problema",
+      "solution": "Solução",
+      "result": "Resultado"
+    }
+  },
   "contact": {
     "title": "Vamos construir algo incrível",
-    "description": "Estou aberto a oportunidades, projetos freelance e colaborações. Vamos conversar.",
+    "description": "Estou aberto a vagas sênior, projetos freelance e colaborações — e aberto a realocação global. Vamos conversar.",
     "email": "Enviar Email",
     "whatsapp": "WhatsApp",
     "github": "GitHub",

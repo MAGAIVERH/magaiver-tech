@@ -14,7 +14,7 @@ const SCROLL_TOP_THRESHOLD = 72;
 const HIDE_SCROLL_THRESHOLD = 120;
 
 export function Header() {
-  const { dict, locale, setLocale } = useI18n();
+  const { locale, setLocale } = useI18n();
   const { lenis, prefersReducedMotion } = useLenis();
   const { theme } = useTheme();
 
@@ -190,12 +190,6 @@ export function Header() {
 
         <span className="shrink-0 text-sm font-medium tracking-wide whitespace-nowrap">
           Magaiver Tech
-        </span>
-
-        <div className="h-4 w-px shrink-0 bg-border" />
-
-        <span className="shrink-0 text-[10px] text-muted-foreground whitespace-nowrap sm:text-xs">
-          {dict.header.title}
         </span>
 
         <div className="h-4 w-px shrink-0 bg-border" />
