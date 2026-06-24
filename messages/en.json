@@ -25,7 +25,9 @@
     "eyebrow": "Flagship project",
     "viewProject": "Live preview",
     "viewCode": "Source code",
-    "highlightsTitle": "Engineering highlights"
+    "highlightsTitle": "Engineering highlights",
+    "inDevelopment": "In active development",
+    "architectureTitle": "Live architecture"
   },
   "intro": {
     "title": "About me",

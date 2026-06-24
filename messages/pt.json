@@ -25,7 +25,9 @@
     "eyebrow": "Projeto principal",
     "viewProject": "Ver ao vivo",
     "viewCode": "Código-fonte",
-    "highlightsTitle": "Destaques de engenharia"
+    "highlightsTitle": "Destaques de engenharia",
+    "inDevelopment": "Em desenvolvimento ativo",
+    "architectureTitle": "Arquitetura ao vivo"
   },
   "intro": {
     "title": "Sobre mim",
