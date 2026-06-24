@@ -24,15 +24,19 @@ const MARQUEE_ITEMS = [
   'Vercel',
 ];
 
+// Render the list twice per group so a single group is always wider than the
+// viewport — guarantees the -50% loop never reveals an empty gap.
+const RENDER_ITEMS = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+
 function MarqueeGroup({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
     <ul className="flex shrink-0 items-center" aria-hidden={ariaHidden}>
-      {MARQUEE_ITEMS.map((tech, i) => {
+      {RENDER_ITEMS.map((tech, i) => {
         const Icon = techIcons[tech];
         return (
           <li
             key={`${tech}-${i}`}
-            className="cursor-hover tech-item group/item flex shrink-0 flex-col items-center gap-3 px-8 py-2 [perspective:700px]"
+            className="cursor-hover tech-item group/item flex w-[150px] shrink-0 flex-col items-center gap-3.5 py-2 [perspective:700px]"
           >
             {Icon && (
               <span
