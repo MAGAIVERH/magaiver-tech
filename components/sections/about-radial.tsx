@@ -8,6 +8,7 @@ import { AboutItem, aboutItems } from '@/constants/about-items';
 import { useI18n } from '@/hooks/use-i18n';
 import { useLenis } from '@/components/providers/lenis-provider';
 import { isMobileExperience } from '@/lib/mobile-experience';
+import { getAboutIcon } from '@/lib/get-about-icon';
 
 const ORBIT_DURATION = 60;
 const VIEW_SIZE = 600;
@@ -107,6 +108,27 @@ export function AboutRadial() {
           ease: 'none',
           delay: i * 0.35,
         });
+      });
+
+      // Energy particles flowing from the core outward along each ray.
+      const particles = group.querySelectorAll<SVGCircleElement>(
+        '.about-flow-particle',
+      );
+      particles.forEach((particle, i) => {
+        const angle = (i / aboutItems.length) * 2 * Math.PI;
+        const ex = CENTER + Math.cos(angle) * viewBoxRadius;
+        const ey = CENTER + Math.sin(angle) * viewBoxRadius;
+
+        gsap
+          .timeline({ repeat: -1, repeatDelay: 0.6, delay: i * 0.22 })
+          .fromTo(
+            particle,
+            { attr: { cx: CENTER, cy: CENTER } },
+            { attr: { cx: ex, cy: ey }, duration: 2.4, ease: 'power1.inOut' },
+            0,
+          )
+          .fromTo(particle, { opacity: 0 }, { opacity: 0.9, duration: 0.5 }, 0)
+          .to(particle, { opacity: 0, duration: 0.7 }, 1.7);
       });
 
       orbitTlRef.current = tl;
@@ -237,9 +259,16 @@ export function AboutRadial() {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className='flex flex-col items-center gap-1'
+                className='flex flex-col items-center gap-1.5'
               >
-                <span className='text-2xl'>{hovered.icon}</span>
+                {(() => {
+                  const HoveredIcon = getAboutIcon(hovered.iconKey);
+                  return (
+                    <span className='flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent'>
+                      <HoveredIcon size={22} strokeWidth={1.75} />
+                    </span>
+                  );
+                })()}
                 <p className='text-base md:text-lg font-semibold text-foreground leading-tight'>
                   {hovered.title[locale]}
                 </p>
@@ -282,6 +311,23 @@ export function AboutRadial() {
               viewBox={`0 0 ${VIEW_SIZE} ${VIEW_SIZE}`}
               aria-hidden
             >
+              <defs>
+                <filter
+                  id='about-glow'
+                  x='-50%'
+                  y='-50%'
+                  width='200%'
+                  height='200%'
+                >
+                  <feGaussianBlur stdDeviation='2.4' result='blur' />
+                  <feMerge>
+                    <feMergeNode in='blur' />
+                    <feMergeNode in='SourceGraphic' />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* faint structural rays + animated dash flow */}
               {aboutItems.map((_, index) => {
                 const angle = (index / aboutItems.length) * 2 * Math.PI;
                 const x2 = CENTER + Math.cos(angle) * viewBoxRadius;
@@ -297,10 +343,35 @@ export function AboutRadial() {
                   />
                 );
               })}
+
+              {/* energy particles flowing outward along each ray */}
+              {aboutItems.map((_, index) => (
+                <circle
+                  key={`p-${index}`}
+                  className='about-flow-particle'
+                  cx={CENTER}
+                  cy={CENTER}
+                  r={3}
+                  fill='rgb(var(--accent))'
+                  opacity={0}
+                  filter='url(#about-glow)'
+                />
+              ))}
+
+              {/* central core */}
+              <circle
+                cx={CENTER}
+                cy={CENTER}
+                r={5}
+                fill='rgb(var(--accent))'
+                opacity={0.6}
+                filter='url(#about-glow)'
+              />
             </svg>
 
             {aboutItems.map((item: AboutItem, index: number) => {
               const angle = (index / aboutItems.length) * 2 * Math.PI;
+              const Icon = getAboutIcon(item.iconKey);
 
               return (
                 <div
@@ -332,23 +403,28 @@ export function AboutRadial() {
                         onPointerLeave={handleIconPointerLeave}
                         aria-label={item.title[locale]}
                         className='
-                          w-10 h-10 md:w-12 md:h-12
+                          group/node
+                          w-11 h-11 md:w-12 md:h-12
                           rounded-full
-                          border border-black/10
+                          border border-border/70
                           flex items-center justify-center
                           transition-colors duration-200
-                          bg-black/5
+                          bg-card/80
                           backdrop-blur
-                          hover:bg-primary/10
-                          hover:border-primary/30
-                          dark:border-white/20
-                          dark:bg-background/40
-                          text-base md:text-lg
+                          text-muted-foreground
+                          hover:bg-accent/10
+                          hover:border-accent/50
+                          hover:text-accent
+                          shadow-sm
                           select-none
                           relative z-[1]
                         '
                       >
-                        {item.icon}
+                        <Icon
+                          size={19}
+                          strokeWidth={1.75}
+                          className='transition-colors duration-200'
+                        />
                       </button>
                     </div>
                   </div>
