@@ -17,6 +17,8 @@ export function GlowButton({ children }: { children: React.ReactNode }) {
   const isDark = resolvedTheme === 'dark';
 
   useEffect(() => {
+    // Intentional one-time client capability sync (no SSR equivalent).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsFinePointer(getIsFinePointer());
   }, []);
 

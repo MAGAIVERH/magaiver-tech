@@ -165,6 +165,8 @@ export function AboutRadial() {
   useEffect(() => {
     if (prefersReducedMotion || !isCoarsePointer) return;
 
+    // On touch devices there is no hover; reset once so the orbit keeps spinning.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHovered(null);
 
     const wakeOrbit = () => {
