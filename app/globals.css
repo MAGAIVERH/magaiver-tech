@@ -344,6 +344,26 @@ body {
   animation-play-state: paused;
 }
 
+/* Continuous 3D coin-flip spin for the stack icons */
+@keyframes tech-spin-3d {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.tech-icon-spin {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  animation: tech-spin-3d 4.5s linear infinite;
+}
+
+.tech-item:hover .tech-icon-spin {
+  animation-duration: 1.4s;
+}
+
 /* Animated scroll cue */
 @keyframes scroll-cue {
   0% {
@@ -366,7 +386,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html.reduce-motion .aurora-orb,
   html.reduce-motion .marquee-track,
-  html.reduce-motion .scroll-cue-dot {
+  html.reduce-motion .scroll-cue-dot,
+  html.reduce-motion .tech-icon-spin {
     animation: none !important;
   }
 
