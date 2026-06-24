@@ -6,6 +6,7 @@ import { FiExternalLink } from 'react-icons/fi';
 import {
   Check,
   Sparkles,
+  Users,
   Building2,
   Store,
   Server,
@@ -25,7 +26,26 @@ import { useLenis } from '@/components/providers/lenis-provider';
 /* ----------------------------- Architecture ----------------------------- */
 
 const VW = 360;
-const VH = 560;
+const VH = 650;
+
+type ArchLabels = {
+  caption: string;
+  multiTenant: string;
+  buyers: string;
+  buyersSub: string;
+  brokerages: string;
+  brokeragesSub: string;
+  marketplace: string;
+  marketplaceSub: string;
+  coreSub: string;
+  edgeSearch: string;
+  edgeLeads: string;
+  edgeApi: string;
+  edgeDashboard: string;
+  rls: string;
+  semantic: string;
+  asyncJobs: string;
+};
 
 type NodeDef = {
   x: number;
@@ -35,120 +55,145 @@ type NodeDef = {
   icon: ReactNode;
   title: string;
   sub?: string;
-  variant?: 'core' | 'default' | 'ai';
+  variant?: 'core' | 'default' | 'ai' | 'actor' | 'market';
 };
 
-const TENANT_CX = [52, 142, 232];
+type EdgeDef = { id: string; d: string };
+type EdgeLabel = { x: number; y: number; text: string };
 
-const NODES: NodeDef[] = [
-  // tenants (many brokerages)
-  ...TENANT_CX.map((cx, i) => ({
-    x: cx - 38,
-    y: 14,
-    w: 76,
-    h: 42,
-    icon: <Building2 size={11} />,
-    title: `Brokerage ${i + 1}`,
-  })),
-  // public marketplace
-  {
-    x: 12,
-    y: 150,
-    w: 132,
-    h: 46,
-    icon: <Store size={12} />,
-    title: 'Public Marketplace',
-    sub: 'SEO leads',
-  },
-  // core
-  {
-    x: 98,
-    y: 248,
-    w: 164,
-    h: 60,
-    icon: <Server size={14} />,
-    title: 'PropAI Core',
-    sub: 'Fastify · RBAC · Zod',
-    variant: 'core' as const,
-  },
-  // data layer
-  {
-    x: 12,
-    y: 366,
-    w: 104,
-    h: 46,
-    icon: <Database size={12} />,
-    title: 'PostgreSQL',
-    sub: 'Row-Level Security',
-  },
-  {
-    x: 128,
-    y: 366,
-    w: 104,
-    h: 46,
-    icon: <Search size={12} />,
-    title: 'pgvector',
-    sub: 'Semantic search',
-  },
-  {
-    x: 244,
-    y: 366,
-    w: 104,
-    h: 46,
-    icon: <Workflow size={12} />,
-    title: 'Redis · BullMQ',
-    sub: 'Async jobs',
-  },
-  // async AI workers
-  {
-    x: 12,
-    y: 476,
-    w: 104,
-    h: 46,
-    icon: <Eye size={12} />,
-    title: 'Vision',
-    sub: 'Gemini',
-    variant: 'ai' as const,
-  },
-  {
-    x: 128,
-    y: 476,
-    w: 104,
-    h: 46,
-    icon: <Sparkles size={12} />,
-    title: 'Embeddings',
-    sub: 'OpenAI',
-    variant: 'ai' as const,
-  },
-  {
-    x: 244,
-    y: 476,
-    w: 104,
-    h: 46,
-    icon: <Target size={12} />,
-    title: 'Lead scoring',
-    sub: 'LLM',
-    variant: 'ai' as const,
-  },
+function buildNodes(t: ArchLabels): NodeDef[] {
+  return [
+    // people layer
+    {
+      x: 18,
+      y: 30,
+      w: 120,
+      h: 48,
+      icon: <Users size={13} />,
+      title: t.buyers,
+      sub: t.buyersSub,
+      variant: 'actor',
+    },
+    {
+      x: 222,
+      y: 30,
+      w: 120,
+      h: 48,
+      icon: <Building2 size={13} />,
+      title: t.brokerages,
+      sub: t.brokeragesSub,
+      variant: 'actor',
+    },
+    // meeting point
+    {
+      x: 110,
+      y: 150,
+      w: 140,
+      h: 54,
+      icon: <Store size={13} />,
+      title: t.marketplace,
+      sub: t.marketplaceSub,
+      variant: 'market',
+    },
+    // engine
+    {
+      x: 96,
+      y: 282,
+      w: 168,
+      h: 56,
+      icon: <Server size={14} />,
+      title: 'PropAI Core',
+      sub: t.coreSub,
+      variant: 'core',
+    },
+    // data layer
+    {
+      x: 12,
+      y: 412,
+      w: 104,
+      h: 50,
+      icon: <Database size={12} />,
+      title: 'PostgreSQL',
+      sub: t.rls,
+    },
+    {
+      x: 128,
+      y: 412,
+      w: 104,
+      h: 50,
+      icon: <Search size={12} />,
+      title: 'pgvector',
+      sub: t.semantic,
+    },
+    {
+      x: 244,
+      y: 412,
+      w: 104,
+      h: 50,
+      icon: <Workflow size={12} />,
+      title: 'Redis · BullMQ',
+      sub: t.asyncJobs,
+    },
+    // async AI workers
+    {
+      x: 12,
+      y: 530,
+      w: 104,
+      h: 50,
+      icon: <Eye size={12} />,
+      title: 'Vision',
+      sub: 'Gemini',
+      variant: 'ai',
+    },
+    {
+      x: 128,
+      y: 530,
+      w: 104,
+      h: 50,
+      icon: <Sparkles size={12} />,
+      title: 'Embeddings',
+      sub: 'OpenAI',
+      variant: 'ai',
+    },
+    {
+      x: 244,
+      y: 530,
+      w: 104,
+      h: 50,
+      icon: <Target size={12} />,
+      title: 'Lead scoring',
+      sub: 'LLM',
+      variant: 'ai',
+    },
+  ];
+}
+
+const CONNECTORS: EdgeDef[] = [
+  { id: 'c-buy', d: 'M 78 78 C 78 118 122 138 152 150' },
+  { id: 'c-brk', d: 'M 208 150 C 238 138 282 118 282 78' },
+  { id: 'c-mkt', d: 'M 180 204 L 180 282' },
+  { id: 'c-brk2', d: 'M 282 78 C 326 160 312 252 250 284' },
+  { id: 'c-d0', d: 'M 168 338 C 120 364 64 384 64 412' },
+  { id: 'c-d1', d: 'M 180 338 L 180 412' },
+  { id: 'c-d2', d: 'M 192 338 C 240 364 296 384 296 412' },
+  { id: 'c-a0', d: 'M 64 462 L 64 530' },
+  { id: 'c-a1', d: 'M 180 462 L 180 530' },
+  { id: 'c-a2', d: 'M 296 462 L 296 530' },
 ];
 
-// connector paths (id -> svg path), flowing from inputs down through the core
-const CONNECTORS: { id: string; d: string }[] = [
-  { id: 'c-t0', d: 'M 52 56 C 52 150 180 150 180 248' },
-  { id: 'c-t1', d: 'M 142 56 C 142 150 180 180 180 248' },
-  { id: 'c-t2', d: 'M 232 56 C 232 150 180 150 180 248' },
-  { id: 'c-mk', d: 'M 144 173 C 168 200 150 235 116 268' },
-  { id: 'c-d0', d: 'M 170 308 C 120 338 64 338 64 366' },
-  { id: 'c-d1', d: 'M 180 308 L 180 366' },
-  { id: 'c-d2', d: 'M 190 308 C 240 338 296 338 296 366' },
-  { id: 'c-a0', d: 'M 64 412 L 64 476' },
-  { id: 'c-a1', d: 'M 180 412 L 180 476' },
-  { id: 'c-a2', d: 'M 296 412 L 296 476' },
-];
+function buildEdgeLabels(t: ArchLabels): EdgeLabel[] {
+  return [
+    { x: 108, y: 116, text: t.edgeSearch },
+    { x: 252, y: 116, text: t.edgeLeads },
+    { x: 180, y: 243, text: t.edgeApi },
+    { x: 316, y: 182, text: t.edgeDashboard },
+  ];
+}
 
 function ArchNode({ node }: { node: NodeDef }) {
   const isCore = node.variant === 'core';
   const isAi = node.variant === 'ai';
+  const isMarket = node.variant === 'market';
 
   return (
     <foreignObject x={node.x} y={node.y} width={node.w} height={node.h}>
@@ -157,26 +202,28 @@ function ArchNode({ node }: { node: NodeDef }) {
           'flex h-full w-full flex-col items-center justify-center gap-0.5 rounded-lg border px-1 text-center backdrop-blur-sm',
           isCore
             ? 'border-accent/50 bg-accent/15 shadow-[0_0_22px_-4px_rgb(var(--accent)/0.5)]'
-            : isAi
-              ? 'border-dashed border-accent/30 bg-background/60'
-              : 'border-border/70 bg-background/70',
+            : isMarket
+              ? 'border-accent/40 bg-accent/[0.08]'
+              : isAi
+                ? 'border-dashed border-accent/30 bg-background/60'
+                : 'border-border/70 bg-background/75',
         ].join(' ')}
       >
         <div
           className={[
             'flex items-center gap-1 font-semibold leading-none',
-            isCore ? 'text-accent' : 'text-foreground/85',
+            isCore || isMarket ? 'text-accent' : 'text-foreground/85',
           ].join(' ')}
           style={{ fontSize: isCore ? 12 : 10 }}
         >
-          <span className={isCore ? 'text-accent' : 'text-accent/80'}>
+          <span className={isCore || isMarket ? 'text-accent' : 'text-accent/80'}>
             {node.icon}
           </span>
           {node.title}
         </div>
         {node.sub && (
           <div
-            className="leading-none text-muted-foreground"
+            className="leading-tight text-muted-foreground"
             style={{ fontSize: 8 }}
           >
             {node.sub}
@@ -187,12 +234,19 @@ function ArchNode({ node }: { node: NodeDef }) {
   );
 }
 
-function PropAIArchitecture({ title }: { title: string }) {
+function PropAIArchitecture({
+  title,
+  labels,
+}: {
+  title: string;
+  labels: ArchLabels;
+}) {
   const { prefersReducedMotion } = useLenis();
+  const nodes = buildNodes(labels);
+  const edgeLabels = buildEdgeLabels(labels);
 
   return (
-    <div className="relative h-full min-h-[24rem] overflow-hidden rounded-xl border border-border/60 bg-muted/30 p-4">
-      {/* faint grid backdrop */}
+    <div className="relative overflow-hidden rounded-xl border border-border/60 bg-muted/30 p-4">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.4]"
@@ -201,11 +255,11 @@ function PropAIArchitecture({ title }: { title: string }) {
             'linear-gradient(rgb(var(--foreground)/0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--foreground)/0.05) 1px, transparent 1px)',
           backgroundSize: '22px 22px',
           maskImage:
-            'radial-gradient(ellipse 85% 85% at 50% 45%, black 35%, transparent 82%)',
+            'radial-gradient(ellipse 90% 90% at 50% 40%, black 40%, transparent 85%)',
         }}
       />
 
-      <div className="relative mb-2 flex items-center justify-between">
+      <div className="relative flex items-center justify-between">
         <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">
           {title}
         </span>
@@ -216,17 +270,43 @@ function PropAIArchitecture({ title }: { title: string }) {
             )}
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
           </span>
-          Multi-tenant
+          {labels.multiTenant}
         </span>
       </div>
 
+      {/* plain-language caption */}
+      <p className="relative mt-2 text-[11px] leading-relaxed text-muted-foreground">
+        {labels.caption}
+      </p>
+
       <svg
         viewBox={`0 0 ${VW} ${VH}`}
-        preserveAspectRatio="xMidYMid meet"
-        className="relative h-[calc(100%-1.75rem)] w-full"
+        className="relative mt-3 block h-auto w-full"
         role="img"
-        aria-label="PropAI OS architecture: brokerages and a public marketplace feed a Fastify core, backed by PostgreSQL with row-level security, pgvector, Redis/BullMQ and async AI workers."
+        aria-label={labels.caption}
       >
+        {/* stacked cards behind the brokerages node => signals "many" */}
+        <g>
+          <rect
+            x={233}
+            y={22}
+            width={120}
+            height={48}
+            rx={9}
+            fill="rgb(var(--background))"
+            stroke="rgb(var(--border) / 0.5)"
+          />
+          <rect
+            x={227}
+            y={26}
+            width={120}
+            height={48}
+            rx={9}
+            fill="rgb(var(--background))"
+            stroke="rgb(var(--border) / 0.7)"
+          />
+        </g>
+
         {/* connectors */}
         <g
           fill="none"
@@ -269,8 +349,28 @@ function PropAIArchitecture({ title }: { title: string }) {
           </g>
         )}
 
+        {/* edge labels (what each connection means) */}
+        {edgeLabels.map((l) => (
+          <foreignObject
+            key={l.text}
+            x={l.x - 42}
+            y={l.y - 8}
+            width={84}
+            height={16}
+          >
+            <div className="flex h-full w-full items-center justify-center">
+              <span
+                className="truncate rounded-full border border-border/70 bg-background/90 px-1.5 py-0.5 font-medium text-muted-foreground"
+                style={{ fontSize: 8 }}
+              >
+                {l.text}
+              </span>
+            </div>
+          </foreignObject>
+        ))}
+
         {/* nodes */}
-        {NODES.map((node, i) => (
+        {nodes.map((node, i) => (
           <ArchNode key={i} node={node} />
         ))}
       </svg>
@@ -299,7 +399,7 @@ export function Featured() {
 
         <Reveal delay={0.05}>
           <GlowBorder className="w-full">
-            <div className="grid gap-8 rounded-[11px] border border-border/80 bg-card p-6 md:p-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid gap-8 rounded-[11px] border border-border/80 bg-card p-6 md:p-8 lg:grid-cols-[1.05fr_0.95fr]">
               {/* Left: narrative */}
               <div className="flex flex-col">
                 <div className="flex flex-wrap items-center gap-3">
@@ -396,8 +496,11 @@ export function Featured() {
               </div>
 
               {/* Right: live architecture visual */}
-              <div className="min-h-[24rem]">
-                <PropAIArchitecture title={dict.featured.architectureTitle} />
+              <div>
+                <PropAIArchitecture
+                  title={dict.featured.architectureTitle}
+                  labels={dict.featured.arch}
+                />
               </div>
             </div>
           </GlowBorder>

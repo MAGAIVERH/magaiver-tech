@@ -27,7 +27,25 @@
     "viewCode": "Source code",
     "highlightsTitle": "Engineering highlights",
     "inDevelopment": "In active development",
-    "architectureTitle": "Live architecture"
+    "architectureTitle": "Live architecture",
+    "arch": {
+      "caption": "A buyer searches the marketplace, their inquiry reaches a brokerage as a lead, and the secure core runs it all in real time.",
+      "multiTenant": "Multi-tenant",
+      "buyers": "Buyers",
+      "buyersSub": "browse & inquire",
+      "brokerages": "Brokerages",
+      "brokeragesSub": "list & manage",
+      "marketplace": "Public Marketplace",
+      "marketplaceSub": "search · listings · leads",
+      "coreSub": "secure API · RBAC",
+      "edgeSearch": "searches",
+      "edgeLeads": "leads & listings",
+      "edgeApi": "secure API",
+      "edgeDashboard": "dashboard",
+      "rls": "Row-Level Security",
+      "semantic": "Semantic search",
+      "asyncJobs": "Async jobs"
+    }
   },
   "intro": {
     "title": "About me",

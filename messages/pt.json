@@ -27,7 +27,25 @@
     "viewCode": "Código-fonte",
     "highlightsTitle": "Destaques de engenharia",
     "inDevelopment": "Em desenvolvimento ativo",
-    "architectureTitle": "Arquitetura ao vivo"
+    "architectureTitle": "Arquitetura ao vivo",
+    "arch": {
+      "caption": "Um comprador busca no marketplace, a sua consulta chega a uma imobiliária como lead, e o core seguro orquestra tudo em tempo real.",
+      "multiTenant": "Multi-tenant",
+      "buyers": "Compradores",
+      "buyersSub": "buscam e consultam",
+      "brokerages": "Imobiliárias",
+      "brokeragesSub": "publicam e gerem",
+      "marketplace": "Marketplace Público",
+      "marketplaceSub": "busca · anúncios · leads",
+      "coreSub": "API segura · RBAC",
+      "edgeSearch": "busca",
+      "edgeLeads": "leads & anúncios",
+      "edgeApi": "API segura",
+      "edgeDashboard": "painel",
+      "rls": "Row-Level Security",
+      "semantic": "Busca semântica",
+      "asyncJobs": "Jobs assíncronos"
+    }
   },
   "intro": {
     "title": "Sobre mim",
