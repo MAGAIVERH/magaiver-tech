@@ -298,8 +298,8 @@ export const projects: Project[] = [
       pt: 'Plataforma de entrega de alimentos',
     },
     description: {
-      en: 'Frontend-focused food delivery application simulating real-world ordering systems with interactive UI and responsive design.',
-      pt: 'Aplicativo de entrega de comida com foco na interface do usuário, simulando sistemas de pedidos do mundo real com interface interativa e design responsivo.',
+      en: "A dynamic, frontend-focused food delivery application designed to simulate real-world ordering systems. It features a highly interactive user interface, efficient state management, and a fully responsive design tailored for seamless cross-device browsing.",
+      pt: "Aplicativo dinâmico de entrega de comida com foco no desenvolvimento frontend, projetado para simular sistemas de pedidos do mundo real. Conta com uma interface de usuário altamente interativa, gerenciamento eficiente de estado e design totalmente responsivo para uma experiência fluida em qualquer dispositivo.",
     },
     stack: [
       'Next.js',
