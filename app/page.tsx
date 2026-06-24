@@ -37,10 +37,10 @@ const Projects = dynamic(
   { loading: () => <div className='min-h-[60vh]' aria-hidden /> },
 );
 
-const AboutRadial = dynamic(
+const Expertise = dynamic(
   () =>
-    import('@/components/sections/about-radial').then((m) => ({
-      default: m.AboutRadial,
+    import('@/components/sections/expertise').then((m) => ({
+      default: m.Expertise,
     })),
   { loading: () => <div className='min-h-[50vh]' aria-hidden /> },
 );
@@ -63,7 +63,7 @@ export default function Home() {
       <Intro />
       <Featured />
       <Projects />
-      <AboutRadial />
+      <Expertise />
       <Contact />
     </main>
   );

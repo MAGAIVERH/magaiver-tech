@@ -62,6 +62,18 @@
       "result": "Resultado"
     }
   },
+  "expertise": {
+    "eyebrow": "Impacto comprovado",
+    "title": "Problemas de engenharia que resolvi",
+    "subtitle": "Cada capacidade abaixo é um problema real levado de ponta a ponta — com o resultado mensurável que gerou. Abra qualquer card para ver o estudo de caso completo.",
+    "cta": "Ver estudo de caso",
+    "problemLabel": "O problema",
+    "modal": {
+      "problem": "Problema",
+      "solution": "Solução",
+      "result": "Resultado"
+    }
+  },
   "contact": {
     "title": "Vamos construir algo incrível",
     "description": "Estou aberto a vagas sênior, projetos freelance e colaborações — e aberto a realocação global. Vamos conversar.",

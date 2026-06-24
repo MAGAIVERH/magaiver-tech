@@ -62,6 +62,18 @@
       "result": "Result"
     }
   },
+  "expertise": {
+    "eyebrow": "Proven impact",
+    "title": "Engineering problems I've solved",
+    "subtitle": "Each capability below is a real problem taken end-to-end — with the measurable result it produced. Open any card to read the full case study.",
+    "cta": "Read case study",
+    "problemLabel": "The problem",
+    "modal": {
+      "problem": "Problem",
+      "solution": "Solution",
+      "result": "Result"
+    }
+  },
   "contact": {
     "title": "Let’s build something great",
     "description": "I’m open to senior roles, freelance projects and collaborations — and open to global relocation. Let’s connect.",
