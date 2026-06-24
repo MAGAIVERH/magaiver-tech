@@ -262,7 +262,124 @@ body {
   );
 }
 
+/* Hero aurora — ambient, theme-aware gradient field */
+@keyframes aurora-drift-a {
+  0%,
+  100% {
+    transform: translate3d(-8%, -6%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(10%, 8%, 0) scale(1.18);
+  }
+}
+
+@keyframes aurora-drift-b {
+  0%,
+  100% {
+    transform: translate3d(8%, 6%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-10%, -8%, 0) scale(0.92);
+  }
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+.aurora-orb-a {
+  background: radial-gradient(
+    circle,
+    rgb(var(--accent) / 0.5) 0%,
+    transparent 68%
+  );
+  animation: aurora-drift-a 22s ease-in-out infinite;
+}
+
+.aurora-orb-b {
+  background: radial-gradient(
+    circle,
+    rgb(var(--foreground) / 0.28) 0%,
+    transparent 70%
+  );
+  animation: aurora-drift-b 26s ease-in-out infinite;
+}
+
+.aurora-orb-c {
+  background: radial-gradient(
+    circle,
+    rgb(var(--spot-accent) / 0.4) 0%,
+    transparent 70%
+  );
+  animation: aurora-drift-a 30s ease-in-out infinite reverse;
+}
+
+/* Infinite tech marquee */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+.marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Animated scroll cue */
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}
+
+.scroll-cue-dot {
+  animation: scroll-cue 1.8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html.reduce-motion .aurora-orb,
+  html.reduce-motion .marquee-track,
+  html.reduce-motion .scroll-cue-dot {
+    animation: none !important;
+  }
+
   html.reduce-motion *,
   html.reduce-motion *::before,
   html.reduce-motion *::after {
