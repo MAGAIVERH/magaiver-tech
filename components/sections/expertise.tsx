@@ -35,10 +35,10 @@ function ExpertiseCard({
     <button
       type="button"
       onClick={onOpen}
-      className="cursor-hover group/card h-full w-full text-left"
+      className="cursor-hover group/card block w-full text-left"
     >
-      <GlowBorder className="h-full">
-        <div className="flex h-full flex-col rounded-[11px] border border-border/80 bg-card p-5 transition-colors duration-300">
+      <GlowBorder>
+        <div className="flex min-h-[19rem] flex-col rounded-[11px] border border-border/80 bg-card p-5 transition-colors duration-300">
           <div className="flex items-center justify-between">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
               {createElement(getAboutIcon(item.iconKey), {
@@ -63,7 +63,7 @@ function ExpertiseCard({
             {item.problem[locale]}
           </p>
 
-          <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-medium text-muted-foreground/80 transition-colors group-hover/card:text-foreground">
+          <span className="mt-auto inline-flex items-center gap-1 pt-6 text-xs font-medium text-muted-foreground/80 transition-colors group-hover/card:text-foreground">
             {dict.expertise.cta}
             <span className="transition-transform duration-300 group-hover/card:translate-x-1">
               →
@@ -195,10 +195,7 @@ export function Expertise() {
             className="flex h-full items-center gap-5 px-[6vw] will-change-transform"
           >
             {aboutItems.map((item, index) => (
-              <div
-                key={item.id}
-                className="h-[clamp(320px,56vh,400px)] w-[300px] shrink-0"
-              >
+              <div key={item.id} className="w-[320px] shrink-0">
                 <ExpertiseCard
                   item={item}
                   index={index}
@@ -221,13 +218,11 @@ export function Expertise() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {aboutItems.map((item, index) => (
               <Reveal key={item.id} delay={(index % 3) * 0.06}>
-                <div className="h-full">
-                  <ExpertiseCard
-                    item={item}
-                    index={index}
-                    onOpen={() => setActive(item)}
-                  />
-                </div>
+                <ExpertiseCard
+                  item={item}
+                  index={index}
+                  onOpen={() => setActive(item)}
+                />
               </Reveal>
             ))}
           </div>
