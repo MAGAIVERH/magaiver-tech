@@ -382,6 +382,7 @@ function PropAIArchitecture({
 
 export function Featured() {
   const { dict, locale } = useI18n();
+  const { prefersReducedMotion } = useLenis();
   const project = featuredProject;
 
   return (
@@ -406,12 +407,14 @@ export function Featured() {
                   <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
                     {project.name}
                   </h2>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[11px] font-semibold text-amber-600 dark:text-amber-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500/70" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-500" />
+                      {!prefersReducedMotion && (
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/70" />
+                      )}
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
                     </span>
-                    {dict.featured.inDevelopment}
+                    {dict.featured.statusLive}
                   </span>
                 </div>
 
@@ -493,6 +496,22 @@ export function Featured() {
                     {dict.featured.viewCode}
                   </a>
                 </div>
+
+                {project.demo && (
+                  <div className="mt-3 space-y-1 text-[11px] leading-relaxed text-muted-foreground">
+                    <p>
+                      {dict.featured.demoCredentials}{' '}
+                      <code className="rounded bg-muted/60 px-1 py-0.5 text-foreground/80">
+                        {project.demo.email}
+                      </code>{' '}
+                      /{' '}
+                      <code className="rounded bg-muted/60 px-1 py-0.5 text-foreground/80">
+                        {project.demo.password}
+                      </code>
+                    </p>
+                    <p>{dict.featured.coldStartNote}</p>
+                  </div>
+                )}
               </div>
 
               {/* Right: live architecture visual */}

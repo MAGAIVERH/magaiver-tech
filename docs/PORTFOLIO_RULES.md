@@ -56,6 +56,10 @@ international recruiter or a senior engineer lands here, they immediately think
 - Flagship project: **PropAI OS** — multi‑tenant real‑estate OS for US brokerages
   (PostgreSQL RLS, pgvector semantic search, BullMQ AI pipeline, Better Auth,
   Turborepo). Numbers: 16 RLS tables · 37 REST endpoints · 45 integration tests.
+  **Shipped and live in production** — never describe it as "in development".
+  Public demo: https://propai-os-api.vercel.app (Vercel web · Dockerized Fastify
+  API on Render · Neon Postgres); dashboard login at `/login` with the demo
+  account published in the project README.
 - Stack signals: Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL,
   Drizzle/Prisma, Redis, Stripe, Docker, Vercel AI SDK.
 - Open to global relocation & remote.
