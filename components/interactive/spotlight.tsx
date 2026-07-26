@@ -5,7 +5,13 @@ import { gsap } from 'gsap';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
-const LERP = 0.08;
+/**
+ * Exponential-decay follow rate (see `cursor.tsx`): frame-rate independent, so
+ * the glow keeps the same softness at 60Hz and 144Hz. Deliberately slower than
+ * the cursor ring, since this layer is ambient light rather than the pointer.
+ */
+const LAMBDA = 11;
+const MAX_FRAME_MS = 50;
 
 function getIsTouch() {
   if (typeof window === 'undefined') return false;
@@ -38,9 +44,20 @@ export function GlobalSpotlight() {
       }
     };
 
+    let seenPointer = false;
+
     const onMove = (event: MouseEvent) => {
       mouse.current.x = event.clientX;
       mouse.current.y = event.clientY;
+
+      // Start the glow under the pointer rather than dragging it across the
+      // page from the (0, 0) origin on the very first move.
+      if (!seenPointer) {
+        seenPointer = true;
+        pos.current.x = event.clientX;
+        pos.current.y = event.clientY;
+        syncPosition();
+      }
 
       if (reducedMotion) {
         pos.current.x = mouse.current.x;
@@ -56,9 +73,12 @@ export function GlobalSpotlight() {
       return () => window.removeEventListener('mousemove', onMove);
     }
 
-    const tick = () => {
-      pos.current.x += (mouse.current.x - pos.current.x) * LERP;
-      pos.current.y += (mouse.current.y - pos.current.y) * LERP;
+    const tick = (_time: number, deltaMs: number) => {
+      const dt = Math.min(deltaMs, MAX_FRAME_MS) / 1000;
+      const lerp = 1 - Math.exp(-LAMBDA * dt);
+
+      pos.current.x += (mouse.current.x - pos.current.x) * lerp;
+      pos.current.y += (mouse.current.y - pos.current.y) * lerp;
       syncPosition();
     };
 

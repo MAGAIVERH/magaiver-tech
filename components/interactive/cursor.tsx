@@ -3,8 +3,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-const LERP = 0.15;
-const RING_LERP = 0.1;
+/**
+ * Follow speeds as exponential-decay rates (higher = snappier), not per-frame
+ * lerp factors: a fixed factor makes the cursor drift further behind on 60Hz
+ * than on 144Hz. `1 - e^(-lambda * dt)` keeps the feel identical on any
+ * display. The dot is near-instant so it reads as the pointer itself; the ring
+ * trails just enough to feel alive.
+ */
+const DOT_LAMBDA = 55;
+const RING_LAMBDA = 17;
+
+/** Cap the step after a tab switch / dropped frames so nothing teleports. */
+const MAX_FRAME_MS = 50;
 
 const HOVER_TARGETS = 'button, a, .cursor-hover, [role="button"]';
 
@@ -23,6 +33,7 @@ export function Cursor() {
   const ringPos = useRef({ x: 0, y: 0 });
   const hovering = useRef(false);
   const reducedMotion = useRef(false);
+  const seenPointer = useRef(false);
 
   useEffect(() => {
     const finePointer = window.matchMedia('(pointer: fine)');
@@ -38,6 +49,17 @@ export function Cursor() {
     const onMove = (event: MouseEvent) => {
       mouse.current.x = event.clientX;
       mouse.current.y = event.clientY;
+
+      // First sighting: snap both layers onto the pointer instead of letting
+      // them crawl in from the top-left origin.
+      if (!seenPointer.current) {
+        seenPointer.current = true;
+        dotPos.current.x = event.clientX;
+        dotPos.current.y = event.clientY;
+        ringPos.current.x = event.clientX;
+        ringPos.current.y = event.clientY;
+      }
+
       setVisible(true);
     };
 
@@ -76,9 +98,14 @@ export function Cursor() {
       );
     };
 
-    const tick = () => {
-      const dotLerp = reducedMotion.current ? 1 : LERP;
-      const ringLerpValue = reducedMotion.current ? 1 : RING_LERP;
+    const tick = (_time: number, deltaMs: number) => {
+      const dt = Math.min(deltaMs, MAX_FRAME_MS) / 1000;
+      const dotLerp = reducedMotion.current
+        ? 1
+        : 1 - Math.exp(-DOT_LAMBDA * dt);
+      const ringLerpValue = reducedMotion.current
+        ? 1
+        : 1 - Math.exp(-RING_LAMBDA * dt);
 
       dotPos.current.x += (mouse.current.x - dotPos.current.x) * dotLerp;
       dotPos.current.y += (mouse.current.y - dotPos.current.y) * dotLerp;
