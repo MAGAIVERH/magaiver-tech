@@ -7,6 +7,11 @@ import { useLenis } from '@/components/providers/lenis-provider';
 
 const COUNT_DURATION = 1400;
 
+/**
+ * Counts from zero to `value` once per mount. The parent remounts it (via a
+ * changing `key`) every time the strip re-enters the viewport, which rewinds
+ * the display to zero synchronously, with no stale-value frame on the way in.
+ */
 function CountUp({ value, active }: { value: number; active: boolean }) {
   const { prefersReducedMotion } = useLenis();
   const [display, setDisplay] = useState(0);
@@ -34,7 +39,7 @@ function CountUp({ value, active }: { value: number; active: boolean }) {
   return <>{prefersReducedMotion ? value : display}</>;
 }
 
-function StatCard({ stat, active }: { stat: Stat; active: boolean }) {
+function StatCard({ stat, runId }: { stat: Stat; runId: number }) {
   const { locale } = useI18n();
 
   return (
@@ -44,7 +49,7 @@ function StatCard({ stat, active }: { stat: Stat; active: boolean }) {
           <span className='text-accent'>{stat.prefix}</span>
         )}
         <span className='bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent'>
-          <CountUp value={stat.value} active={active} />
+          <CountUp key={runId} value={stat.value} active={runId > 0} />
         </span>
         {stat.suffix && <span className='text-accent'>{stat.suffix}</span>}
       </div>
@@ -58,18 +63,19 @@ function StatCard({ stat, active }: { stat: Stat; active: boolean }) {
 export function Stats() {
   const { dict } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
-  const [active, setActive] = useState(false);
+  // Bumped on every entrance; 0 means the strip has not been reached yet.
+  const [runId, setRunId] = useState(0);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
 
+    // Stays connected on purpose: the strip re-counts every time it comes back
+    // into view, so the numbers feel alive on the way back up the page instead
+    // of sitting there as static text.
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setActive(true);
-          observer.disconnect();
-        }
+        if (entry.isIntersecting) setRunId((n) => n + 1);
       },
       { threshold: 0.35 },
     );
@@ -92,7 +98,7 @@ export function Stats() {
 
         <div className='grid grid-cols-2 gap-y-10 rounded-2xl border border-border/60 bg-card/60 p-8 backdrop-blur-sm md:grid-cols-4 md:divide-x md:divide-border/60'>
           {stats.map((stat) => (
-            <StatCard key={stat.id} stat={stat} active={active} />
+            <StatCard key={stat.id} stat={stat} runId={runId} />
           ))}
         </div>
       </div>

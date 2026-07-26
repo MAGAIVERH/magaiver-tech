@@ -12,9 +12,16 @@ export type Stat = {
 };
 
 /**
- * Credibility metrics shown in the animated stats strip. Every number is
- * defensible against the CV (years of experience, shipped projects, and the
- * PropAI OS flagship: 37 REST endpoints, 45 integration tests).
+ * Credibility metrics shown in the animated stats strip.
+ *
+ * Rule: career-level signals only. Never single-project trivia (endpoint or
+ * test counts belong on that project's card, where they have context) and
+ * never counts of the portfolio's own content. Two numbers of scale, two of
+ * measured business impact.
+ *
+ * Sources: years and shipped projects from the CV; 48% is the load-time win in
+ * the `performance` case study (6.2s to 3.2s) and 74% the MTTR win in the
+ * `monitoring` case study (4.2h to 1.1h), both in `constants/about-items.ts`.
  */
 export const stats: Stat[] = [
   {
@@ -30,16 +37,21 @@ export const stats: Stat[] = [
     label: { en: 'Projects in production', pt: 'Projetos em produção' },
   },
   {
-    id: 'endpoints',
-    value: 37,
+    id: 'load-time',
+    value: 48,
+    suffix: '%',
     label: {
-      en: 'REST endpoints on PropAI OS',
-      pt: 'Endpoints REST no PropAI OS',
+      en: 'Faster load times delivered',
+      pt: 'Mais rápido no carregamento',
     },
   },
   {
-    id: 'tests',
-    value: 45,
-    label: { en: 'Integration tests passing', pt: 'Testes de integração' },
+    id: 'incident-recovery',
+    value: 74,
+    suffix: '%',
+    label: {
+      en: 'Faster incident recovery',
+      pt: 'Mais rápido para resolver incidentes',
+    },
   },
 ];
