@@ -8,12 +8,12 @@ import { SiteEffects } from '@/components/interactive/site-effects';
 
 const SITE_URL = 'https://magaiver-tech.vercel.app';
 const DESCRIPTION =
-  'Magaiver Magalhães — Full Stack Engineer with 5+ years building multi-tenant SaaS and AI-powered platforms end-to-end. Next.js, React, TypeScript, Node.js, PostgreSQL.';
+  'Magaiver Magalhães, Full Stack Engineer with 5+ years building multi-tenant SaaS and AI-powered platforms end-to-end. Next.js, React, TypeScript, Node.js, PostgreSQL.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Magaiver Magalhães — Full Stack Engineer',
+    default: 'Magaiver Magalhães, Full Stack Engineer',
     template: '%s · Magaiver Magalhães',
   },
   description: DESCRIPTION,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'Magaiver Magalhães — Full Stack Engineer',
+    title: 'Magaiver Magalhães, Full Stack Engineer',
     description: DESCRIPTION,
     url: SITE_URL,
     siteName: 'Magaiver Magalhães',
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
         url: '/apresentacao.png',
         width: 1200,
         height: 630,
-        alt: 'Magaiver Magalhães — Full Stack Engineer',
+        alt: 'Magaiver Magalhães, Full Stack Engineer',
       },
     ],
     locale: 'en_US',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Magaiver Magalhães — Full Stack Engineer',
+    title: 'Magaiver Magalhães, Full Stack Engineer',
     description: DESCRIPTION,
     images: ['/apresentacao4.png'],
   },

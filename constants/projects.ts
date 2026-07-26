@@ -36,8 +36,8 @@ export const projects: Project[] = [
   {
     id: 'online-store',
     title: {
-      en: 'Bewear — Online Store (E-commerce)',
-      pt: 'Bewear — Loja online (E-commerce)',
+      en: 'Bewear: Online Store (E-commerce)',
+      pt: 'Bewear: Loja online (E-commerce)',
     },
     description: {
       en: 'Interactive e-commerce application built with React and Next.js, focusing on reusable components, performance, and modern frontend architecture.',

@@ -8,7 +8,7 @@
       "Frontend Craftsman"
     ],
     "title": "I build scalable platforms that move real business metrics.",
-    "subtitle": "Full Stack Engineer with 5+ years shipping multi-tenant SaaS and AI-powered products end-to-end — Next.js, TypeScript, Node.js and PostgreSQL.",
+    "subtitle": "Full Stack Engineer with 5+ years shipping multi-tenant SaaS and AI-powered products end-to-end: Next.js, TypeScript, Node.js and PostgreSQL.",
     "cta": "View Projects",
     "contact": "Get in touch",
     "downloadCv": "Download CV",
@@ -16,17 +16,19 @@
   },
   "stats": {
     "title": "By the numbers",
-    "subtitle": "Signals from real, production-grade work — not toy demos."
+    "subtitle": "Measured outcomes from products running in production, used by real people."
   },
   "marquee": {
     "title": "The stack I build with"
   },
   "featured": {
     "eyebrow": "Flagship project",
-    "viewProject": "Live preview",
+    "viewProject": "Live site",
     "viewCode": "Source code",
     "highlightsTitle": "Engineering highlights",
-    "inDevelopment": "In active development",
+    "statusLive": "Live in production",
+    "demoCredentials": "Brokerage dashboard: use \"Agent login\" on the site with",
+    "coldStartNote": "Free-tier API sleeps when idle. The first request may take ~40s.",
     "architectureTitle": "Live architecture",
     "arch": {
       "caption": "A buyer searches the marketplace, their inquiry reaches a brokerage as a lead, and the secure core runs it all in real time.",
@@ -50,10 +52,10 @@
   "intro": {
     "title": "About me",
     "p1": "I'm Magaiver, a Full Stack Software Engineer with 5+ years of experience designing and building scalable SaaS platforms and AI-powered products.",
-    "p2": "I work end-to-end across frontend and backend — designing architectures, modeling databases and shipping production systems. My core stack is Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL and Drizzle or Prisma.",
-    "p3": "I'm currently building PropAI OS, a multi-tenant real-estate operating system for US brokerages — tenant isolation with PostgreSQL Row-Level Security, semantic search with pgvector and an async AI pipeline on BullMQ.",
+    "p2": "I work end-to-end across frontend and backend: designing architectures, modeling databases and shipping production systems. My core stack is Next.js, React, TypeScript, Node.js, Fastify, PostgreSQL and Drizzle or Prisma.",
+    "p3": "I built and shipped PropAI OS, a multi-tenant real-estate operating system for US brokerages, now live in production with a public demo: tenant isolation with PostgreSQL Row-Level Security, semantic search with pgvector and an async AI pipeline on BullMQ.",
     "p4": "I apply Clean Architecture, DDD and API-first design, and integrate LLMs, computer vision and embeddings into production-grade, cost-controlled workflows.",
-    "p5": "My goal is to build systems that generate real business impact — combining technical quality, scalability and a relentless focus on the user."
+    "p5": "My goal is to build systems that generate real business impact, combining technical quality, scalability and a relentless focus on the user."
   },
   "projects": {
     "title": "Selected Projects",
@@ -83,7 +85,7 @@
   "expertise": {
     "eyebrow": "Proven impact",
     "title": "Engineering problems I've solved",
-    "subtitle": "Each capability below is a real problem taken end-to-end — with the measurable result it produced. Open any card to read the full case study.",
+    "subtitle": "Each capability below is a real problem taken end-to-end, with the measurable result it produced. Open any card to read the full case study.",
     "cta": "Read case study",
     "problemLabel": "The problem",
     "modal": {
@@ -94,7 +96,7 @@
   },
   "contact": {
     "title": "Let’s build something great",
-    "description": "I’m open to senior roles, freelance projects and collaborations — and open to global relocation. Let’s connect.",
+    "description": "I’m open to senior roles, freelance projects and collaborations, as well as to global relocation. Let’s connect.",
     "email": "Send Email",
     "whatsapp": "WhatsApp",
     "github": "GitHub",

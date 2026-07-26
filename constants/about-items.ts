@@ -258,8 +258,8 @@ export const aboutItems: AboutItem[] = [
       pt: 'Implementei uma stack completa de observabilidade: logs JSON estruturados com IDs de correlação que ligavam cada log a uma requisição específica, rastreamento distribuído entre serviços e uma camada de métricas com alertas baseados em SLOs. Criei runbooks para os 10 incidentes mais comuns e configurei detecção de anomalias para capturar problemas antes dos usuários.',
     },
     result: {
-      en: 'Mean time to detect an incident dropped from "whenever users complained" to under 4 minutes. Mean time to resolve fell from 4.2 hours to 1.1 hours, with 74% improvement. The team stopped finding out about problems from Twitter. On-call stress dropped measurably — engineers stopped avoiding rotation.',
-      pt: 'O tempo médio de detecção de incidentes caiu de "quando os usuários reclamavam" para menos de 4 minutos. O tempo médio de resolução caiu de 4,2 horas para 1,1 hora, melhora de 74%. O time parou de descobrir problemas pelo Twitter. O estresse de plantão caiu visivelmente — os engenheiros pararam de evitar a rotação.',
+      en: 'Mean time to detect an incident dropped from "whenever users complained" to under 4 minutes. Mean time to resolve fell from 4.2 hours to 1.1 hours, with 74% improvement. The team stopped finding out about problems from Twitter. On-call stress dropped measurably: engineers stopped avoiding rotation.',
+      pt: 'O tempo médio de detecção de incidentes caiu de "quando os usuários reclamavam" para menos de 4 minutos. O tempo médio de resolução caiu de 4,2 horas para 1,1 hora, melhora de 74%. O time parou de descobrir problemas pelo Twitter. O estresse de plantão caiu visivelmente: os engenheiros pararam de evitar a rotação.',
     },
   },
 
